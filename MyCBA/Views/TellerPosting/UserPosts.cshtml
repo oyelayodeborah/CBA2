@@ -1,0 +1,274 @@
+﻿@model IEnumerable<MyCBA.Core.Models.TellerPosting>
+
+@{
+    ViewBag.Title = "View All Teller Postings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@if (ViewBag.Message!=null)
+{
+    if (ViewBag.Message.ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+    <br />
+    @{
+        if (Session["role"].ToString() != "Admin")
+        {
+            MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+            var IsBusinessOpened = _context.BusinessConfigs.Where(c => c.IsBusinessOpen == true).FirstOrDefault();
+            var businessConfig = _context.BusinessConfigs.ToList();
+            if (businessConfig.Count == 0)
+            {
+                <p>Sorry you cant buy or sell cash,Business Configuration is not yet setup</p>
+            }
+            else
+            {
+                MyCBA.Data.Repositories.TellerRepository tellerRepo = new MyCBA.Data.Repositories.TellerRepository();
+                MyCBA.Data.Repositories.GlAccountRepository glAcctRepo = new MyCBA.Data.Repositories.GlAccountRepository();
+                var userid = (int)Session["id"];
+                var getTillAccount = tellerRepo.GetByUser(userid);
+                if (getTillAccount == null)
+                {
+                    <p style="font-size:large">You don't have a tillAccount yet</p>
+                }
+                else
+                {
+                    var getGL = glAcctRepo.Get(getTillAccount.TillAccountId);
+
+                    <p style="font-size:large">TillAccount Balance: # @getGL.acountBalance.ToString("N02")</p>
+
+                    <br />
+                    if (businessConfig != null)
+                    {
+                        <input type="submit" value="BUY CASH" class="btn" id="buy_cash" style="background-color: dodgerblue" />
+                        <input type="submit" value="SELL CASH" class="btn" id="sell_cash" style="background-color: teal" />
+                        <br />
+                        <br />
+                        if (TempData["message"].ToString() == "")
+                        {
+
+                        }
+                        else if (TempData["message"].ToString() == "Insufficient")
+                        {
+                            <div class="alert alert-error">
+                                <strong>Buy Cash was not successful, Insufficient balance &nbsp;</strong>
+                            </div>
+                        }
+                        else if (TempData["message"].ToString() == "VaultError")
+                        {
+                            <div class="alert alert-error">
+                                <strong>Buy Cash was not successful, Insufficient balance &nbsp;</strong>
+                            </div>
+                        }
+                        else if (Session["vaultBal"].ToString() != null)
+                        {
+                            <div class="alert alert-error">
+                                <strong>Buy Cash was not successful, Insufficient balance &nbsp;</strong>
+                            </div>
+                        }
+                        else if (TempData["message"].ToString() == "InsufficientTill")
+                        {
+                            <div class="alert alert-error">
+                                <strong>Sell Cash was not successful, You have do not have sufficient balance to complete this transaction &nbsp;</strong>
+                            </div>
+                        }
+                        else if (Session["InsufficientTill"].ToString() != null)
+                        {
+                            <div class="alert alert-error">
+                                <strong>Sell Cash was not successful, You have do not have sufficient balance to complete this transaction &nbsp;</strong>
+                            </div>
+                        }
+                        else if (TempData["message"].ToString() == "Buy Cash")
+                        {
+                            <div class="alert alert-success">
+                                <strong>Buy Cash was successful &nbsp;</strong>
+                            </div>
+                        }
+                        else if (TempData["message"].ToString() == "Sell Cash")
+                        {
+                            <div class="alert alert-success">
+                                <strong>Sell Cash was successful&nbsp;</strong>
+                            </div>
+                        }
+                        else
+                        {
+                            @TempData["message"]
+                        }
+                    }
+                    else
+                    {
+                        <p> Sorry you cant buy or sell cash, because business is closed.</p>
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    <table class="table table-hover table-responsive table-condensed" id="tellerpost">
+        <thead>
+            <tr>
+                <th>
+                    Customer Account Name
+                </th>
+
+                <th>
+                    Customer Account Number
+                </th>
+
+                <th>
+                    Amount
+                </th>
+                <th>
+
+                    Transaction Type
+
+                </th>
+                <th>
+                    Transaction Date
+
+                </th>
+                <th>
+                    Status
+
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                MyCBA.Data.Repositories.CustomerAccountRepository custAcctRepo = new MyCBA.Data.Repositories.CustomerAccountRepository();
+                var getCustAcct = custAcctRepo.GetByAcctNum(item.customerAcctNum);
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => getCustAcct.acctName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.customerAcctNum)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.postingType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.id })
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <div id="buyEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                    <h4 class="modal-title" id="myModalLabel">Buy Cash</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.ValidationSummary()
+                    <div class="row">
+                        <div id="mesg">
+
+
+                        </div>
+
+                        @using (Html.BeginForm("BuyCash", "TellerPosting"))
+                        {
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="amount" class="form-control" name="amount" required="required" placeholder="Enter Amount" step="any" min="0.00" />
+                                </div>
+                            </div>
+                            <center><button type="submit" class="btn" style="background-color:yellowgreen">BUY CASH</button></center>
+
+                            @Html.AntiForgeryToken()
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sellEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                    <h4 class="modal-title" id="myModalLabel">Sell Cash</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.ValidationSummary()
+                    <div class="row">
+
+                        @using (Html.BeginForm("SellCash", "TellerPosting"))
+                        {
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="amount" class="form-control" name="amount" required="required" placeholder="Enter Amount" step="any" min="0.00" />
+                                </div>
+                            </div>
+                            <center><button type="submit" class="btn" style="background-color:yellowgreen">SELL CASH</button></center>
+
+                            @Html.AntiForgeryToken()
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section ViewSpecificJavascript
+    {
+        <script>
+
+            $("#tellerpost").dataTable();
+            $("#buy_cash").click(function (e) {
+                $("#buyEdit").modal('show');
+
+            });
+            $("#sell_cash").click(function (e) {
+                $("#sellEdit").modal('show');
+
+            });
+
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut(100, null);
+                },
+                    3000);
+            });
+
+        </script>
+
+    }
+

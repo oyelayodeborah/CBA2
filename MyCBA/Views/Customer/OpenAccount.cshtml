@@ -1,0 +1,116 @@
+﻿@using System.Web.Optimization
+@model MyCBA.ViewModels.CustomerAccountViewModels
+@{
+    ViewBag.Title = "Add a new Customer Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm(@*null, null, FormMethod.Post, new { id = "form" }*@))
+{
+@Html.AntiForgeryToken()
+<div class="form-horizontal col-md-6">
+    <span id="error" class="text-red "></span>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (ViewBag.Message != null)
+    {
+        if (ViewBag.Message == "Success")
+        {
+            <div class="alert alert-success">
+                <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+        }
+        else if (ViewBag.Message == "Empty")
+        {
+            <div class="alert alert-error">
+                <p>Kindly fill all fields<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        else if (ViewBag.Message == "Error")
+        {
+            <div class="alert alert-error">
+                <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        else if (ViewBag.Message == "Exist")
+        {
+            <div class="alert alert-error">
+                <p>Customer don't exist <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+    }
+        @Html.HiddenFor(model => model.id)
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.customerAccount.customerId)
+                @Html.DropDownListFor(model => model.customerAccount.customerId, new SelectList(Model.Customers,
+                    "id", "name"),"Choose an Option", new {@class = "form-control",required="required"})
+                @Html.ValidationMessageFor(model => model.customerAccount.customerId, "", new { @class = "text-danger" })
+                <span id="customererror" class="text-red "></span>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.customerAccount.acctName)
+            @Html.EditorFor(model => model.customerAccount.acctName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Account Name", required = "required", min = 5, max = 60, pattern = @"^[ a-zA-Z]+$" } })
+            @Html.ValidationMessageFor(model => model.customerAccount.acctName, "", new { @class = "text-danger" })
+            <span id="acctNameerror" class="text-red "></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.customerAccount.branchId)
+            @Html.DropDownListFor(model => model.customerAccount.branchId, new SelectList(Model.Branches,
+                "id", "name"),"Choose an Option", new {@class = "form-control",required="required", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.customerAccount.branchId, "", new { @class = "text-danger" })
+            <span id="branchNameerror" class="text-red "></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.accType)
+            @*@Html.EnumDropDownListFor(model => model.accType, "Choose Option", new { @class = "form-control", required = "required", value = "" })*@
+            @Html.DropDownListFor(m => m.accType, new SelectList(Enum.GetNames(typeof(MyCBA.ViewModels.CustomerAccountViewModels.AccountType))), "Select a Type", new { @class = "form-control", required = "required", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.accType, "", new { @class = "text-danger" })
+            <span id="accTypeerror" class="text-red "></span>
+        </div>
+
+
+
+    </div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="SUBMIT" class="btn btn-default" />
+    </div>
+</div>
+
+
+}
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+
+            // ;
+            $("form").submit(function (e) {
+
+                var acctName = $('#CustomerAccount_acctName').val();
+                var accType = $('#accType').val();
+                var branchName = $('#CustomerAccount_branchId').val();
+                if (acctName == ""  || accType == "" || branchName == "") {
+                    $("input[type = 'submit']").attr("disabled", true);
+                    e.preventDefault();
+                    $("#error").html("All fields are required");
+                }
+                $("#error").html("");
+
+            })
+        })
+    </script>
+}

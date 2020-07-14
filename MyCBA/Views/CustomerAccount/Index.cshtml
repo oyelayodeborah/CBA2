@@ -1,0 +1,137 @@
+﻿@model IEnumerable<MyCBA.Core.Models.CustomerAccount>
+
+@{
+    ViewBag.Title = "View All Customer Accounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+
+}
+@if (TempData["message"] != null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+    <div class="alert alert-success">
+        <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+    </div>
+
+    }
+}
+@{
+    if (Session["role"].ToString() == "Admin")
+    { <p>
+            @Html.ActionLink("Add a new Customer Account", "Create")
+        </p>
+        <p>
+            @Html.ActionLink("View All Loan Accounts", "ViewLoanAccount")
+        </p>
+    }
+
+}
+
+<table class="table table-hover table-responsive table-condensed" id="custacct">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.acctName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.acctNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.branchId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.accType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.acctbalance)
+            </th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var getBranch = _context.Branches.Find(item.branchId);
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.acctName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.acctNumber)
+                </td>
+                <td>
+                    @if (getBranch != null)
+                    {
+                        @getBranch.name
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.accType)
+                </td>
+                <td>
+                    @item.acctbalance.ToString("N02")
+                </td>
+                <td>
+
+                    @{
+                        MyCBA.Core.Models.CustomerAccount customerAccount = _context.CustomerAccounts.Find(item.id);
+                        MyCBA.Data.Repositories.LoanCustAcctRepository loanRepo = new MyCBA.Data.Repositories.LoanCustAcctRepository();
+                        if (Session["role"].ToString() == "Admin")
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                            <span> &nbsp;| &nbsp;</span>
+                            @Html.ActionLink("Details", "Details", new { id = item.id })
+                            <span> &nbsp;| &nbsp;</span>
+
+
+                            if (customerAccount.status == "Opened")
+                            {
+                                @Html.ActionLink("Close Account", "Close", new { id = item.id })
+                                <span> &nbsp;| &nbsp;</span>
+                                if (loanRepo.GetAccount(item.id) == null)
+                                {
+                                    @Html.ActionLink("Open Loan Account", "OpenLoanAccount", new { id = item.id })
+
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Take a new Loan", "OpenLoanAccount", new { id = item.id })
+                                }
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Open Account", "Open", new { id = item.id })
+                            }
+                        }
+                    }
+                    @if (Session["role"].ToString() == "Teller" && customerAccount.status == "Opened")
+                    {
+                        @Html.ActionLink("Post Transaction", "Post", new { id = item.id })
+                    }
+                    else if (Session["role"].ToString() == "Teller" && customerAccount.status == "Closed")
+                    {
+                        <p>Account is closed</p>
+                    }
+                    @*|@Html.ActionLink("Post Transaction", "Post", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section ViewSpecificJavascript
+    {
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $(".alert").fadeOut(100, null);
+        },
+            3000);
+    });
+    $("#custacct").dataTable();
+
+</script>
+
+}

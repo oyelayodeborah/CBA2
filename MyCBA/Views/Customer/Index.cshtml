@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MyCBA.Core.Models.Customer>
+
+@{
+    ViewBag.Title = "View All Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Message"]!=null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+    <p>
+        @Html.ActionLink("Add new Customer", "Create")
+    </p>
+    <table class="table table-hover table-responsive table-condensed" id="customers">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.phoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.gender)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gender)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @*@Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+                        @Html.ActionLink("Open Account", "OpenAccount", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    @section ViewSpecificJavascript
+    {
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut(100, null);
+                },
+                    3000);
+            });
+            $("#customers").dataTable();
+
+        </script>
+
+    }

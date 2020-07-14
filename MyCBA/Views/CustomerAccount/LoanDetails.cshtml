@@ -1,0 +1,105 @@
+﻿@model MyCBA.Core.Models.LoanCustAcct
+
+@{
+    ViewBag.Title = "View Loan Account Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    MyCBA.Core.Models.CustomerAccount customerAccountt = new MyCBA.Core.Models.CustomerAccount();
+    MyCBA.Data.Repositories.CustomerAccountRepository custAccountRepo = new MyCBA.Data.Repositories.CustomerAccountRepository();
+    decimal total = 0;
+    customerAccountt = custAccountRepo.Get(Model.ServicingAccountId);
+    total = Model.LoanAmountRemaining + Model.LoanInterestRemaining;
+    decimal reduction = Model.LoanAmountReduction + Model.LoanInterestReduction;
+
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Account Name
+        </dt>
+        <dd>
+            @customerAccountt.acctName
+        </dd>
+        <dt>
+            Account Number
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+        <dt>
+            Loan Amount
+        </dt>
+        <dd>
+            @Model.LoanAmount.ToString("N02")
+        </dd>
+        <dt>
+            Servicing Account Number
+        </dt>
+        <dd>
+            @customerAccountt.acctNumber.ToString()
+        </dd>
+        <dt>
+            Loan Amount Remaining
+        </dt>
+        <dd>
+            @Model.LoanAmountRemaining.ToString("N02")
+        </dd>
+        <dt>
+            Loan Interest Remaining
+        </dt>
+        <dd>
+            @Model.LoanInterestRemaining.ToString("N02")
+        </dd>
+        <dt>
+            Total Remaining
+        </dt>
+        <dd>
+            @total.ToString("N02")
+        </dd>
+        <dt>
+            Daily Reduction
+        </dt>
+        <dd>
+            @reduction.ToString("N02")
+        </dd>
+        <dt>
+            Duration In Months
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DurationInMonths)
+        </dd>
+        <dt>
+            Starting Date
+        </dt>
+        <dd>
+            @Model.StartDate.ToString("D")
+        </dd>
+        <dt>
+            Ending Date
+        </dt>
+        <dd>
+            @Model.EndDate.ToString("D")
+        </dd>
+        <dt>
+            Number of days to end Date
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DaysCount)
+        </dd>
+        <dt>
+            Status
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("View All Loan Accounts", "ViewLoanAccount")
+    </p>
+</div>

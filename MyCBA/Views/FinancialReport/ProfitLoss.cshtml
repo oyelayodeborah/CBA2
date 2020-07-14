@@ -1,0 +1,177 @@
+﻿@model IEnumerable<MyCBA.Core.Models.ExpensesIncomeEntry>
+@{
+    ViewBag.Title = "Profit Or Loss";
+}
+<div id="page-wrapper">
+    <h2 class="text-center" style="color:#333">Debs Bank Profit And Loss Statement</h2>
+    <h4 class="text-center" style="color:#333">@ViewBag.TableTitle</h4>
+    @using (Html.BeginForm())
+    {
+        if (TempData["message"] != null)
+        {
+            if (TempData["message"].ToString() == "Error")
+            {
+                <div class="alert alert-error">
+                    <p>Start Date is greater than the End Date <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+                </div>
+
+            }
+        }
+        <p class="text-center">
+            From: <input type="date" name="date1" /> To: <input type="date" name="date2" />
+            <input type="submit" value="Load" />
+        </p>
+    }
+    <br />
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th style="background-color:#333"><b style="color:white">Income</b></th>
+            <th style="background-color:#333"><b style="color:white">Amount (N)</b></th>
+        </tr>
+        @foreach (var item in Model.Where(m => m.EntryType == MyCBA.Core.Models.ExpensesIncomeEntry.PandLType.Income))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+
+                @{
+                    if (@item.Amount.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @item.Amount.ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <td>
+                            @val
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.Amount.ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
+                        </td>
+                    }
+                }
+            </tr>
+        }
+        <tr>
+            <th></th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th>Total Income</th>
+            @{
+                decimal sumIncome = (decimal)ViewBag.SumOfIncome;
+                if (@sumIncome.ToString().StartsWith("-"))
+                {
+                    var val = "";
+                    var remove = @sumIncome.ToString("N02").Remove(0, 1);
+                    val = "(" + remove + ")";
+                    <th>
+                        @val
+                    </th>
+                }
+                else
+                {
+                    <th>
+                        @sumIncome.ToString("N02")
+                    </th>
+                }
+            }
+        </tr>
+        <tr> <th></th><th> </th> </tr>
+        <tr> <th></th><th> </th> </tr>
+        <tr>
+            <th style="background-color:#333"><b style="color:white">Expenses</b></th>
+            <th style="background-color:#333"><b style="color:white"></b></th>
+        </tr>
+        @foreach (var item in Model.Where(m => m.EntryType == MyCBA.Core.Models.ExpensesIncomeEntry.PandLType.Expenses))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                @{
+                    if (@item.Amount.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @item.Amount.ToString("N02").Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <td>
+                            @val
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.Amount.ToString("N02")
+                        </td>
+                    }
+                }
+            </tr>
+        }
+
+        <tr>
+            <th></th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th>Total Expense</th>
+            @{
+                decimal sumExp = (decimal)ViewBag.SumOfExpense;
+                if (@sumExp.ToString().StartsWith("-"))
+                {
+                    var val = "";
+                    var remove = @sumExp.ToString("N02").Remove(0, 1);
+                    val = "(" + remove + ")";
+                    <th>
+                        @val
+                    </th>
+                }
+                else
+                {
+                    <th>
+                        @sumExp.ToString("N02")
+                    </th>
+                }
+            }
+        </tr>
+        <tr> <th></th><th> </th> </tr>
+        <tr> <th></th><th> </th> </tr>
+        <tr>
+            <th>Profit/Loss</th>
+            @{
+                decimal p_L = (decimal)ViewBag.Profit;
+                if (@p_L.ToString().StartsWith("-"))
+                {
+                    var val = "";
+                    var remove = @p_L.ToString("N02").Remove(0, 1);
+                    val = "(" + remove + ")";
+                    <th>
+                        @val
+                    </th>
+                }
+                else
+                {
+                    <th>
+                        @p_L.ToString("N02")
+                    </th>
+                }
+            }
+        </tr>
+    </table>
+</div>
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        });
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@using System.Web.Optimization
+@model MyCBA.Core.Models.User
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+
+@Styles.Render("~/Bundles/css")
+
+@using (Html.BeginForm("Login", "Account"))
+{
+
+<div class=" form-signin">
+    <div class="text-center  mb-4">
+        <h1>Login</h1>
+    </div>
+
+    @if (ViewBag.Message != null)
+        {
+    <div class="alert alert-danger">
+        <strong>Error!&nbsp;</strong> @ViewBag.Message
+    </div>
+        }
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        @Html.EditorFor(model => model.email, new { @class = "form-control", type="email", placeholder = "Username",required="required" })
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+
+        @Html.PasswordFor(model => model.passwordHash, new { @class = "form-control", type="password", placeholder = "Password",required="required" })
+        @Html.ValidationMessageFor(model => model.passwordHash, "", new { @class = "text-danger" })
+
+    </div>
+
+
+    @Html.AntiForgeryToken()
+    <button class="btn btn-lg btn-block" type="submit"style="background-color:#9ACD32">Log in</button>
+    <p class="mt-5 mb-3 text-muted text-center"><b>Debs</b>CBA&copy; 2019</p>
+
+</div>
+}

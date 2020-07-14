@@ -1,0 +1,185 @@
+﻿@model MyCBA.ViewModels.UserViewModels
+@{
+    ViewBag.Title = "Edit User Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-6">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <span id="error" class="text-red "></span>
+        @Html.HiddenFor(model => model.id)
+        @if (TempData["Message"].ToString() == "Success")
+        {
+            <div class="alert alert-success">
+                <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        else if (TempData["Message"].ToString() == "Exist")
+        {
+            <div class="alert alert-error">
+                <p>Email Address or Telephone Number exist <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        else if (TempData["Message"].ToString() == "Error")
+        {
+            <div class="alert alert-error">
+                <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.fullName)
+            @Html.EditorFor(model => model.fullName, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = 255, pattern = "^[A-Z\\sa-z]+$", minlength = 6 } })
+            @Html.ValidationMessageFor(model => model.fullName, "", new { @class = "text-danger" })
+            <span id="fullNameerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email)
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @type = "email", required = "required", minlength = 9, maxlength = 255 } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            <span id="emailerror" class="text-red"></span>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.phoneNumber)
+            @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", pattern = "0\\d+$", @type = "phone", required = "required", maxlength = 11, minlength = 11 } })
+            @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+            <span id="phoneNumbererror" class="text-red"></span>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.branchId)
+            @Html.DropDownListFor(model => model.branchId, new SelectList(Model.Branches,
+                "id", "name"),"Choose an Option", new {@class = "form-control", required="required", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.branchId, "", new { @class = "text-danger" })
+            <span id="branchNameerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="SUBMIT" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+
+            //$('#fullName').keyup(function () {
+            //    value = $(this).val();
+            //    if (value.length < 5 || value.length > 255) {
+            //        $("input[type = 'submit']").attr("disabled", true);
+            //        $("#fullNameerror").html("FullName can only be between 5 or 255 characters");
+            //    } else {
+            //        $("#fullNameerreor").html("");
+
+            //        var NameRegex = "/^[a-zA-Z0–9.!#$%&’*+\/=?^_`{|}~-]+@@[a-zA-Z0–9](?:[a-zA-Z0–9-]{0,61} [a-zA-Z0–9])?(?:\.[a-zA-Z0–9](?:[a-zA-Z0–9-]{0,61}[a-zA-Z0–9])?)*$/";
+
+            //        if (!NameRegex.test($("#fullName").val())) {
+            //            $("#fullNameerreor").html("Re-enter fullName");
+            //            e.preventDefault();
+            //            $("input[type = 'submit']").attr("disabled", true);
+            //        }
+            //        else {
+            //            $("#fullNameerreor").html("");
+            //            $("input[type = 'submit']").attr("disabled", false);
+
+            //        }
+
+            //    }
+            //})
+
+
+            //$('#email').keyup(function () {
+            //    value = $(this).val();
+            //    if (value.length < 9 || value.length > 255) {
+            //        $("input[type = 'submit']").attr("disabled", true);
+            //        $("#emailerror").html("Email Address can only be between 9 or 255 characters");
+            //    } else {
+            //        $("#emailerror").html("");
+            //        var EmailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            //        if (EmailRegex.test('#email')) {
+
+            //        } else {
+            //            $("#emailerror").html("");
+
+            //            value = EmailRegex.exec('#email');
+            //            if (value) {
+            //                $("input[type = 'submit']").attr("disabled", false);
+            //                $("#emailerror").html("");
+            //            } else {
+            //                $("input[type = 'submit']").attr("disabled", true);
+            //                $("#emailerror").html("Email format is not correct");
+            //            }
+            //        }
+
+
+            //    }
+            //})
+
+            //$('#phoneNumber').keyup(function () {
+            //    value = $(this).val();
+            //    if (value.length < 11 || value.length > 11) {
+            //        $("input[type = 'submit']").attr("disabled", true);
+            //        $("#phoneNumbererror").html("Telephone Number can only be between 11 characters");
+            //    } else {
+            //        $("#phoneNumbererror").html("");
+            //        var phoneRegex = /^[+]?[\s./0-9]*[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/g;
+
+            //        if (phoneRegex.test('#phoneNumber')) {
+
+            //        } else {
+            //            $("#phoneNumbererror").html("");
+            //            value = phoneRegex.exec('#phoneNumber');
+            //            if (value) {
+            //                $("input[type = 'submit']").attr("disabled", false);
+            //                $("#phoneNumbererror").html("");
+            //            } else {
+            //                $("input[type = 'submit']").attr("disabled", true);
+            //                $("#phoneNumbererror").html("Telephone number format is not correct");
+            //            }
+            //        }
+
+
+            //    }
+            //})
+
+            //var EmailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            //var phoneRegex = /^[+]?[\s./0-9]*[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/g;
+
+            // ;
+            $("form").submit(function (e) {
+
+                var fullName = $('#fullName').val();
+                var email = $('#email').val();
+                var phoneNumber = $('#phoneNumber').val();
+                var branchName = $('#branchId').val();
+                if (fullName == "" || email == "" || phoneNumber == "" || branchName == 0) {
+                    e.preventDefault();
+                    $("input[type = 'submit']").attr("disabled", true);
+                    $("#error").html("All fields are required");
+                }
+                else {
+                    $("input[type = 'submit']").attr("disabled", false);
+
+                    $("#error").html("");
+                }
+
+            })
+        })
+    </script>
+}

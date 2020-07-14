@@ -1,0 +1,57 @@
+﻿@model MyCBA.Core.Models.User
+
+@{
+    ViewBag.Title = "View User Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+    var getBranch = _context.Branches.Find(Model.branchId);
+    var getRole = _context.Roles.Find(Model.roleId);
+
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.branchId)
+        </dt>
+        <dd>
+           @getBranch.name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.role)
+        </dt>
+        <dd>
+            @getRole.name
+        </dd>
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("View All Users", "Index")
+    </p>
+</div>

@@ -1,0 +1,165 @@
+﻿@using System.Web.Optimization
+@model MyCBA.Core.Models.CurrentAcctMgt
+@{
+    ViewBag.Title = "Current Account Configuration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Current", "AccountConfiguration", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal col-md-6">
+    @if (ViewBag.Message != null)
+    {
+        if (ViewBag.Message == "Error")
+        {
+            <div class="alert alert-danger">
+                <strong>Configuration Failed</strong>
+            </div>
+        }
+        else if (ViewBag.Message == "Success")
+        {
+            <div class="alert alert-success">
+                <strong>Configuration Successful</strong>
+            </div>
+        }
+    }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <span id="error" class="text-red"></span>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentCreditInterestRate)
+            <label>(in %)</label>
+            @Html.EditorFor(model => model.CurrentCreditInterestRate, new { htmlAttributes = new { @class = "form-control", type = "number", step = "any", min = "0" } })
+            @Html.ValidationMessageFor(model => model.CurrentCreditInterestRate, "", new { @class = "text-danger" })
+            <span id="creditinterestrateerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentMinimumBalance)
+            <label>(in naira)</label>
+            @Html.EditorFor(model => model.CurrentMinimumBalance, new { htmlAttributes = new { @class = "form-control", type = "number", step = "any", min = "0.00" } })
+            @Html.ValidationMessageFor(model => model.CurrentMinimumBalance, "", new { @class = "text-danger" })
+            <span id="minbalanceerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentInterestExpenseGLId)
+            @Html.DropDownListFor(model => model.CurrentInterestExpenseGLId, new SelectList(Model.CurrentInterestExpense,
+               "id", "Name"),"Choose an Option", new {@class = "form-control", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.CurrentInterestExpenseGLId, "", new { @class = "text-danger" })
+            <span id="currentinterestexpenseglerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentInterestPayableGLId)
+            @Html.DropDownListFor(model => model.CurrentInterestPayableGLId, new SelectList(Model.CurrentInterestPayable,
+            "id", "Name"),"Choose an Option", new {@class = "form-control", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.CurrentInterestPayableGLId, "", new { @class = "text-danger" })
+            <span id="currentinterestexpenseglerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentCot)
+            <label>(in naira)</label>
+            @Html.EditorFor(model => model.CurrentCot, new { htmlAttributes = new { @class = "form-control", type = "number", step = "any", min = "0.00" } })
+            @Html.ValidationMessageFor(model => model.CurrentCot, "", new { @class = "text-danger" })
+            <span id="coterror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentCotIncomeGLId)
+            @Html.DropDownListFor(model => model.CurrentCotIncomeGLId, new SelectList(Model.CurrentCotIncome,
+                       "id", "Name"),"Choose an Option", new {@class = "form-control", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.CurrentCotIncomeGLId, "", new { @class = "text-danger" })
+            <span id="cotincomeglerror" class="text-red"></span>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" id="submit" class="btn btn-default" />
+        </div>
+    </div>
+
+
+}
+@section ViewSpecificJavascript
+    {
+    <script>
+        //$(document).ready(function () {
+        //    $('#CurrentCreditInterestRate').keyup(function () {
+        //        value = $(this).val();
+                
+        //        var regextest = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
+        //        var regexec = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+
+        //        if (regextest.test(value)) {
+                   
+        //        } else {
+        //            value = regexec.exec(value);
+        //            if (value) {
+        //                $("input[type = 'submit']").attr("disabled", false);
+        //                $("#creditinterestrateerror").html("");
+        //            } else {
+        //                $("input[type = 'submit']").attr("disabled", true);
+        //                $("#creditinterestrateerror").html("Current Credit Interest Rate can only have numbers or decimal value");
+        //            }
+        //        }
+        //    })
+
+        //    $('#CurrentMinimumBalance').keyup(function () {
+        //        value = $(this).val();
+                
+        //        var regextest = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
+        //        var regexec = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+        //        if (regextest.test(value)) {
+
+        //        } else {
+        //            value = regexec.exec(value);
+        //            if (value) {
+        //                $("input[type = 'submit']").attr("disabled", false);
+        //                $("#minbalanceerror").html("");
+        //            } else {
+        //                $("input[type = 'submit']").attr("disabled", true);
+        //                $("#minbalanceerror").html("Current Minimum Balance can only have numbers or decimal value");
+        //            }
+        //        }
+        //    })
+
+        //    $('#CurrentCot').keyup(function () {
+        //        value = $(this).val();
+
+        //        var regextest = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
+        //        var regexec = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+        //        if (regextest.test(value)) {
+
+        //        } else {
+        //            value = regexec.exec(value);
+        //            if (value) {
+        //                $("#coterror").html("");
+        //            } else {
+        //                $("#coterror").html("Current COT can only have numbers or decimal value");
+        //            }
+        //        }
+        //    })
+
+            
+
+        //    //$("form").submit(function (e) {
+
+        //    //    var creditinterestrate = $('#CreditInterestRate').val();
+        //    //    var minbalance = $('#MinBalance').val();
+        //    //    var savingsinterestexpensegl = $('#SavingsInterestExpenseGL').val();
+        //    //    if (creditinterestrate == "0.00" || minbalance == "0.00" || creditinterestrate == ""
+        //    //        || minbalance == "" || savingsinterestexpensegl == "" ) {
+        //    //        e.preventDefault();
+        //    //        $("#error").html("Credit Interest Rate or Minimum Balance or Interest Expense GL Account is required");
+        //    //    }
+        //    //    else {
+        //    //        $("#error").html("");
+        //    //    }
+        //    //})
+        //})
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@model MyCBA.Core.Models.Teller
+
+@{
+    ViewBag.Title = "View Teller Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+    var getTillAccount = _context.GlAccounts.Find(Model.TillAccountId);
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TillAccountId)
+        </dt>
+        <dd>
+            @getTillAccount.Name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.tillAccountBalance)
+        </dt>
+        <dd>
+            @Model.tillAccountBalance.ToString("N02")
+        </dd>
+
+    </dl>
+
+
+
+    <p>
+        @* @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |*@
+        @Html.ActionLink("View All Tellers", "Index")
+    </p>
+</div>

@@ -1,0 +1,68 @@
+﻿@model MyCBA.Core.Models.CustomerAccount
+
+@{
+    ViewBag.Title = "View Customer Account Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+    var getBranch = _context.Branches.Find(Model.branchId);
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.acctName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.acctName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.acctNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.acctNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.branchId)
+        </dt>
+        <dd>
+            @getBranch.name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.accType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.accType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.acctbalance)
+        </dt>
+        <dd>
+            @Model.acctbalance.ToString("N02")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.createdAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.createdAt)
+        </dd>
+
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("View All Customer Accounts", "Index")
+    </p>
+</div>

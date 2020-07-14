@@ -1,0 +1,115 @@
+﻿@using System.Web.Optimization
+@model MyCBA.Core.Models.LoanAcctMgt
+@{
+    ViewBag.Title = "Update Loan Account Configuration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateLoan", "AccountConfiguration", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal col-md-6">
+    @if (ViewBag.Message != null)
+    {
+        if (ViewBag.Message == "Error")
+        {
+            <div class="alert alert-danger">
+                <strong>Configuration Update Failed</strong>
+            </div>
+        }
+        else if (ViewBag.Message == "Success")
+        {
+            <div class="alert alert-success">
+                <strong>Configuration Update Successful</strong>
+            </div>
+        }
+    }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        <span id="error" class="text-red"></span>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoanDebitInterestRate)
+            <label>(in %)</label>
+            @Html.EditorFor(model => model.LoanDebitInterestRate, new { htmlAttributes = new { @class = "form-control", type = "number", step = "any", min = "0.00" } })
+            @Html.ValidationMessageFor(model => model.LoanDebitInterestRate, "", new { @class = "text-danger" })
+            <span id="debitinterestrateerror" class="text-red"></span>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LoanInterestExpenseGLId)
+                @Html.DropDownListFor(model => model.LoanInterestExpenseGLId, new SelectList(Model.LoanInterestExpense,
+                   "id", "Name"),"Choose an Option", new {@class = "form-control", @data_live_search = "true" })
+                @Html.ValidationMessageFor(model => model.LoanInterestExpenseGLId, "", new { @class = "text-danger" })
+                <span id="savingsinterestexpenseglerror" class="text-red"></span>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoanInterestIncomeGLId)
+            @Html.DropDownListFor(model => model.LoanInterestIncomeGLId, new SelectList(Model.LoanInterestIncome,
+               "id", "Name"),"Choose an Option", new {@class = "form-control", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.LoanInterestIncomeGLId, "", new { @class = "text-danger" })
+            <span id="savingsinterestexpenseglerror" class="text-red"></span>
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LoanInterestReceivableGLId)
+                @Html.DropDownListFor(model => model.LoanInterestReceivableGLId, new SelectList(Model.LoanInterestReceivable,
+                   "id", "Name"),"Choose an Option", new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.LoanInterestReceivableGLId, "", new { @class = "text-danger" })
+                <span id="savingsinterestexpenseglerror" class="text-red"></span>
+            </div>*@
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" id="submit" class="btn btn-default" />
+        </div>
+    </div>
+
+
+}
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        });
+        //$(document).ready(function () {
+        //    $('#LoanDebitInterestRate').keyup(function () {
+        //        value = $(this).val();
+
+        //        var regextest = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
+        //        var regexec = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+
+        //        if (regextest.test(value)) {
+
+        //        } else {
+        //            value = regexec.exec(value);
+        //            if (value) {
+        //                $("#debitinterestrateerror").html("");
+        //            } else {
+        //                $("#debitinterestrateerror").html("Loan Debit Interest Rate can only have numbers or decimal value");
+        //            }
+        //        }
+        //    })
+
+
+
+        //    //$("form").submit(function (e) {
+
+        //    //    var DebitInterestRate = $('#DebitInterestRate').val();
+        //    //    var loaninterestincomegl = $('#LoanInterestIncomeGL').val();
+        //    //    if (deitinterestrate == "0.00"|| debitinterestrate == ""
+        //    //        || loaninterestincomegl == "" ) {
+        //    //        e.preventDefault();
+        //    //        $("#error").html("Debit Interest Rate or Interest Expense GL Account is required");
+        //    //    }
+        //    //    else {
+        //    //        $("#error").html("");
+        //    //    }
+        //    //})
+        //})
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿@using System.Web.Optimization
+@model MyCBA.ViewModels.GlCategoryViewModels
+@{
+    ViewBag.Title = "Add new GL Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "GlCategory", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal col-md-6">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Error!&nbsp;</strong> @ViewBag.Message
+            </div>
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <span id="error" class="text-red"></span>
+        <div class="form-group">
+            @Html.LabelFor(model => model.name)
+            @Html.EditorFor(model => model.GlCategories.name, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "3", maxlength = "40" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            <span id="nameerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description)
+            @Html.EditorFor(model => model.GlCategories.description, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "3", maxlength = "150" } })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            <span id="descriptionerror" class="text-red"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mainAccountCategory)
+            @Html.EnumDropDownListFor(model => model.GlCategories.mainAccountCategory, "Choose Option", new { @class = "form-control", required = "required", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.mainAccountCategory, "", new { @class = "text-danger" })
+            <span id="mainAccountCategoryerror" class="text-red"></span>
+        </div>
+
+
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" id="submit" class="btn btn-default" />
+        </div>
+    </div>
+
+
+}
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        
+    //$("input[type = 'submit']").attr("disabled", true);
+    //$('#GlCategories_name').keyup(function () {
+    //    value = $(this).val();
+    //    if (value.length < 3 || value.length > 30) {
+    //        $("#nameerror").html("Category name can only be between 5 or 30 characters");
+    //    } else {
+    //        $("#nameerror").html("");
+
+    //    }
+    //})
+    //$('#GlCategories_description').keyup(function () {
+    //    value = $(this).val();
+    //    if (value.length < 3 || value.length > 255) {
+    //        $("#descriptionerror").html("Description can only be between 3 or 255 characters");
+    //    } else {
+    //        $("#descriptionerror").html("");
+
+    //    }
+    //})
+
+    $("form").submit(function (e) {
+
+    var name = $('#GlCategories_name').val();
+    var description = $('#GlCategories_description').val();
+    var mainAccountCategory = $('#GlCategories_mainAccountCategory').val();
+    if (name == "" || description == "" || mainAccountCategory == 0) {
+    e.preventDefault();
+    $("#error").html("Category name or Description or Main Account Category is required");
+    }
+
+    else {
+    $("#error").html("");
+    }
+
+
+    })
+})
+    </script>
+}

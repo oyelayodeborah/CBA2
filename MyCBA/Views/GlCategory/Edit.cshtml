@@ -1,0 +1,70 @@
+﻿@model MyCBA.ViewModels.GlCategoryViewModels
+@{
+    ViewBag.Title = "Edit GL Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal col-md-6">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Error!&nbsp;</strong> @ViewBag.Message
+        </div>
+    }
+    <span id="error" class="text-red"></span>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.name)
+        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "3", maxlength = "40" } })
+
+        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        <span id="nameerror" class="text-red"></span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description)
+        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "3", maxlength = "150" } })
+        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        <span id="descriptionerror" class="text-red"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            
+            $("form").submit(function (e) {
+
+                var name = $('#name').val();
+                var description = $('#description').val();
+                
+                if (name == "" || description == "") {
+                    e.preventDefault();
+                    $("#error").html("All fields are required");
+                }
+
+                else {
+                    $("#error").html("");
+                }
+
+
+            })
+        })
+    </script>
+}

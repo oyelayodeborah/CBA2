@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MySwitch.Core.Models.SinkNode>
+
+@{
+    ViewBag.Title = "View All SinkNodes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Message"] != null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+<p>
+    @Html.ActionLink("Add new SinkNode", "Add")
+</p>
+<table class="table table-hover table-responsive table-condensed" id="customers">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HostName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IPAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Port)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HostName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IPAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Port)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+@section ViewSpecificJavascript
+    {
+    <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut(100, null);
+                },
+                    3000);
+            });
+            $("#customers").dataTable();
+
+    </script>
+
+}

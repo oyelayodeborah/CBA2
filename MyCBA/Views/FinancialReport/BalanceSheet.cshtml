@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "Balance Sheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal ltotal = 0;
+    decimal total = 0;
+}
+<div>
+    <a href="/FinancialReport/ExportToExcel" style="background-color:#333; color:#ecf0f5" class="btn btn-secondary col-md-2 col-md-offset-10 justify-content-md-end">
+        Generate Report<i class="fa fa-download"></i>
+        @*@Html.Action("Generate Report", "ExportToExcel", "FinancialReport")>*@
+    </a>
+</div>
+<h2 class="text-center" style="color:#333">Debs Bank Balance Sheet</h2>
+<h4 class="text-center" style="color:#333">@ViewBag.TableTitle</h4>
+<div id="page-wrapper">
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Account
+            </th>
+            <th>
+                Amount
+            </th>
+        </tr>
+        <tr>
+            <td style="background-color:#333"><b style="color:white">Asset</b></td>
+            <td style="background-color:#333"><b style="color:white">N</b></td>
+        </tr>
+        @if (ViewBag.Assets != null)
+        {
+            foreach (var gitem in ViewBag.Assets as List<MyCBA.Core.Models.GlAccount>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => gitem.Name)
+                    </td>
+                    @{
+                        if (@gitem.acountBalance.ToString().StartsWith("-"))
+                        {
+                            var val = "";
+                            var remove = @Math.Round(gitem.acountBalance, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                            val = "(" + remove + ")";
+                            <td>
+                                @val
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Math.Round(gitem.acountBalance, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
+                            </td>
+                        }
+                    }
+
+                </tr>
+            }
+            <tr>
+                <th>Total</th>
+                @{
+                    if (@ViewBag.AssetSum.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @Math.Round(ViewBag.AssetSum, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <th>
+                            @val
+                        </th>
+                    }
+                    else
+                    {
+                        <th>@Math.Round(ViewBag.AssetSum, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)</th>
+                    }
+                }
+            </tr>
+        }
+
+        <tr></tr>
+        <tr>
+            <td style="background-color:#333"><b style="color:white">Capital</b></td>
+            <td style="background-color:#333"><b style="color:white">N</b></td>
+        </tr>
+        @if (ViewBag.Capitals != null)
+        {
+            foreach (var gitem in ViewBag.Capitals as List<MyCBA.Core.Models.GlAccount>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => gitem.Name)
+                    </td>
+
+                    @{
+                        if (@gitem.acountBalance.ToString().StartsWith("-"))
+                        {
+                            var val = "";
+                            var remove = @Math.Round(gitem.acountBalance, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                            val = "(" + remove + ")";
+                            <td>
+                                @val
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Math.Round(gitem.acountBalance, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+            <tr>
+                <th>Total</th>
+                @{
+                    if (@ViewBag.CapitalSum.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @Math.Round(ViewBag.CapitalSum, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <th>
+                            @val
+                        </th>
+                    }
+                    else
+                    {
+                        <th>@Math.Round(ViewBag.CapitalSum, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)</th>
+                    }
+                }
+
+            </tr>
+        }
+        <tr></tr>
+        <tr>
+            <td style="background-color:#333"><b style="color:white">Liability</b></td>
+            <td style="background-color:#333"><b style="color:white">N</b></td>
+        </tr>
+        @if (ViewBag.Liability != null)
+        {
+            foreach (var llitem in ViewBag.Liability as List<MyCBA.Core.Models.LiabilityViewModel>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => llitem.AccountName)
+                    </td>
+
+                    @{
+                        if (@llitem.Amount.ToString().StartsWith("-"))
+                        {
+                            var val = "";
+                            var remove = @llitem.Amount.ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                            val = "(" + remove + ")";
+                            <td>
+                                @val
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Math.Round(llitem.Amount, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
+                            </td>
+                        }
+                    }
+                </tr>
+                        }
+            <tr>
+                <th>Total</th>
+                @{
+                    ltotal = (decimal)ViewBag.LiabilitySum;
+                    if (@ltotal.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @Math.Round(ltotal, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <th>
+                            @val
+                        </th>
+                    }
+                    else
+                    {
+                        <th>@Math.Round(ltotal, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)</th>
+                    }
+                }
+            </tr>
+            <tr><th></th></tr>
+            <tr>
+                <th>Capital + Liability</th>
+                @{
+                    total = (decimal)ViewBag.CapitalSum + (decimal)ViewBag.LiabilitySum;
+                    if (@total.ToString().StartsWith("-"))
+                    {
+                        var val = "";
+                        var remove = @Math.Round(total, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture).Remove(0, 1);
+                        val = "(" + remove + ")";
+                        <th>
+                            @val
+                        </th>
+                    }
+                    else
+                    {
+                        <th>@Math.Round(total, 2).ToString("N2", System.Globalization.CultureInfo.InvariantCulture)</th>
+                    }
+                }
+            </tr>
+                    }
+        </table>
+</div>
+

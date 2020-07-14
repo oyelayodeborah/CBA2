@@ -1,0 +1,60 @@
+﻿@model MyCBA.Core.Models.GlAccount
+
+@{
+    ViewBag.Title = "View GL Account Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+    var getBranch = _context.Branches.Find(Model.BranchId);
+    var getGlCategory = _context.GlCategories.Find(Model.GlCategoryId);
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.acountBalance)
+        </dt>
+        <dd>
+            @model.acountBalance.ToString("N02")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GlCategory)
+        </dt>
+        <dd>
+            @getGlCategory.name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mainCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mainCategory)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Branch)
+        </dt>
+        <dd>
+            @getBranch.name
+        </dd>
+        
+
+
+
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("View Existing GlAccounts", "Index")
+    </p>
+</div>

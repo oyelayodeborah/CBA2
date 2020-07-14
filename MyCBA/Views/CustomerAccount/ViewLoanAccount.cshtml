@@ -1,0 +1,131 @@
+﻿@model IEnumerable<MyCBA.Core.Models.LoanCustAcct>
+
+@{
+    ViewBag.Title = "View All Loan Accounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Data.Repositories.CustomerAccountRepository custAccountRepo = new MyCBA.Data.Repositories.CustomerAccountRepository();
+    // = custAccountRepo.Get(model.ServicingAccountId);
+
+}
+
+@if (TempData["Message"]!=null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+    @{
+        if (Session["role"].ToString() == "Admin")
+        { <p>
+                @Html.ActionLink("Open Loan Account", "TakeLoan")
+            </p>
+        }
+    }
+
+    <table class="table table-hover table-responsive table-condensed" id="loancustacct">
+        <thead>
+            <tr>
+                <th>
+                    Account Name
+                </th>
+                <th>
+                    Account Number
+                </th>
+                <th>
+                    Loan Amount
+                </th>
+                <th>
+                    Loan Amount Remaining
+                </th>
+                <th>
+                    Loan Interest Remaining
+                </th>
+                <th>
+                    Daily Reduction
+                </th>
+                <th>
+                    Remaining Total
+                </th>
+                <th>
+                    Duration In Months
+                </th>
+                <th>
+                    Servicing Account Number
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                MyCBA.Core.Models.CustomerAccount customerAccountt = new MyCBA.Core.Models.CustomerAccount();
+                customerAccountt = custAccountRepo.Get(item.ServicingAccountId);
+                decimal total = item.LoanAmountRemaining + item.LoanInterestRemaining;
+                decimal reduction = item.LoanAmountReduction + item.LoanInterestReduction;
+
+
+                <tr>
+                    <td>
+                        @customerAccountt.acctName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNumber)
+                    </td>
+                    <td>
+                        @item.LoanAmount.ToString("N02")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoanAmountRemaining)
+                    </td>
+                    <td>
+                        @item.LoanInterestRemaining.ToString("N02")
+                    </td>
+                    <td>
+                        @reduction.ToString("N02")
+                    </td>
+                    <td>
+                        @total.ToString("N02")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DurationInMonths)
+                    </td>
+                    <td>
+                        @customerAccountt.acctNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            <span> &nbsp;| &nbsp;</span>*@
+                        @Html.ActionLink("Details", "LoanDetails", new { id = item.Id })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section ViewSpecificJavascript
+    {
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut(100, null);
+                },
+                    3000);
+            });
+            $("#loancustacct").dataTable();
+
+        </script>
+
+    }

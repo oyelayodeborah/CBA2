@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MyCBA.Core.Models.Teller>
+
+@{
+    ViewBag.Title = "View All Tellers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+
+}
+
+@if (ViewBag.Message!=null)
+{
+    if (ViewBag.Message.ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+    <p>
+        @Html.ActionLink("Assign Till Account To User", "AssignTillAccount")
+    </p>
+    <table class="table table-hover table-responsive table-condensed" id="tellers">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.user)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TillAccountId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tillAccountBalance)
+                </th>
+
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    @{
+                        var getTillAccount = _context.GlAccounts.Find(item.TillAccountId);
+                        var getUser = _context.Users.Find(item.userId);
+                        if (getTillAccount != null || getUser != null)
+                        {
+                            <td>
+                                @getUser.email
+                            </td>
+                            <td>
+                                @getTillAccount.Name
+                            </td>
+                            <td>
+                                @item.tillAccountBalance.ToString("N02")
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.userId
+                            </td>
+                            <td>
+                                @item.TillAccountId
+                            </td>
+                            <td>
+                                @item.tillAccountBalance.ToString("N02")
+                            </td>
+                        }
+                    }
+
+
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.id }) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) @*|
+                            @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    @section ViewSpecificJavascript
+    {
+        <script>
+
+            $("#tellers").dataTable();
+
+        </script>
+
+    }

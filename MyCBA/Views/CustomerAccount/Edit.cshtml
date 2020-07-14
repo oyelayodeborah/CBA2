@@ -1,0 +1,106 @@
+﻿@model MyCBA.ViewModels.CustomerAccountViewModels
+@{
+    ViewBag.Title = "Edit Customer Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal col-md-6">
+    @if (ViewBag.Message != null)
+    {
+        if (ViewBag.Message == "Success")
+        {
+            <div class="alert alert-success">
+                <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+        }
+        else if (ViewBag.Message == "Empty")
+        {
+            <div class="alert alert-error">
+                <p>Kindly fill all fields<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+        else if (ViewBag.Message == "Error")
+        {
+            <div class="alert alert-error">
+                <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+            </div>
+
+        }
+    }
+    <span id="error" class="text-red"></span>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.customerAccount.acctName)
+        @Html.EditorFor(model => model.customerAccount.acctName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Account Name" } })
+        @Html.ValidationMessageFor(model => model.customerAccount.acctName, "", new { @class = "text-danger" })
+        <span id="acctNameerror" class="text-red "></span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.customerAccount.branchId)
+        @Html.DropDownListFor(model => model.customerAccount.branchId, new SelectList(Model.Branches,
+            "id", "name"),"Choose an Option", new {@class = "form-control"})
+        @Html.ValidationMessageFor(model => model.customerAccount.branchId, "", new { @class = "text-danger" })
+        <span id="branchNameerror" class="text-red "></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+            $('#customerAccount.acctName').keyup(function () {
+                value = $(this).val();
+                if (value.length < 10 || value.length > 150) {
+                    e.preventDefault();
+                    $("#acctNameerror").html("Account Name can only be between 10 or 150 characters");
+                } else {
+                    $("#acctNameerror").html("");
+
+                }
+            })
+
+
+
+            $("form").submit(function (e) {
+
+                var acctName = $('#customerAccount.acctName').val();
+                var branchName = $('#customerAccount.branchId').val();
+                if (acctName == "" || branchName == "") {
+                    e.preventDefault();
+                    $("#error").html("All fields are required");
+                }
+
+                else {
+                    $("#error").html("");
+                }
+
+
+            })
+        })
+    </script>
+}

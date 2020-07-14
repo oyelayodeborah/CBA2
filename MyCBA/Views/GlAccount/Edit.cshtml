@@ -1,0 +1,55 @@
+﻿@model MyCBA.ViewModels.GlAccountViewModels
+@{
+    ViewBag.Title = "Edit GL Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal col-md-6">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Error!&nbsp;</strong> @ViewBag.Message
+        </div>
+    }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required", minlength = "3", maxlength = "40" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BranchId)
+        @Html.DropDownListFor(model => model.BranchId, new SelectList(Model.Branches,
+            "id", "name"), new {@class = "form-control",required="required"})
+        @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section ViewSpecificJavascript
+    {
+    <script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $(".alert").fadeOut(100, null);
+        },
+            3000);
+    });
+    </script>
+    }

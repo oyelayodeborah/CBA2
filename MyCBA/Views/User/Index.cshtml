@@ -1,0 +1,119 @@
+﻿@model IEnumerable<MyCBA.Core.Models.User>
+
+@{
+    ViewBag.Title = "View All Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+
+}
+@if (TempData["Message"]!=null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+    <div class="alert alert-success">
+        <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+    </div>
+
+    }
+}
+@if (ViewBag.message != null)
+{
+    if (ViewBag.message.ToString() == "Success")
+    {
+    <div class="alert alert-success">
+        <p>@ViewBag.message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+    </div>
+
+    }
+}
+@if (ViewBag.Message != null)
+{
+    if (ViewBag.Message.ToString() == "Success")
+    {
+    <div class="alert alert-success">
+        <p>@ViewBag.Message <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+    </div>
+
+    }
+}
+
+<p>
+    @Html.ActionLink("Add new User", "Create")
+</p>
+<table class="table table-hover table-responsive table-condensed" id="user">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.roleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.branchId)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var getBranch = _context.Branches.Find(item.branchId);
+            var getRole = _context.Roles.Find(item.roleId);
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phoneNumber)
+                </td>
+                <td>
+                    @getBranch.name
+                </td>
+                <td>
+                    @getRole.name
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        });
+        $("#user").dataTable();
+
+    </script>
+
+}

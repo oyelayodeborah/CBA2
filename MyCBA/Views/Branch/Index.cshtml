@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MyCBA.Core.Models.Branch>
+
+@{
+    ViewBag.Title = "View All Branches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Message"]!=null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+    <p>
+        @Html.ActionLink("Add new Branch", "Create")
+    </p>
+    <table class="table table-hover table-responsive table-condensed" id="customers">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    @section ViewSpecificJavascript
+    {
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut(100, null);
+                },
+                    3000);
+            });
+            $("#customers").dataTable();
+
+        </script>
+
+    }

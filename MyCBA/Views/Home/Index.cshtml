@@ -1,0 +1,339 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Index";
+    ViewBag.Description = "Home Page";
+
+
+}
+@if (TempData["Message"] != null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+        </div>
+
+    }
+}
+
+@if (Session["role"].ToString() == "Admin")
+{
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua-gradient">
+            <div class="inner">
+                <h3>@ViewBag.branch</h3>
+
+                <p>Branch</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-adn"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green-gradient">
+            <div class="inner">
+                <h3>@ViewBag.customer</h3>
+
+                <p>Customer</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-address-card"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red-gradient">
+            <div class="inner">
+                <h3>@ViewBag.customerAccount</h3>
+
+                <p>Customer Account</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-address-book"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow-gradient">
+            <div class="inner">
+                <h3>@ViewBag.glAccounts</h3>
+
+                <p>GlAccount</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-th"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-teal-gradient">
+            <div class="inner">
+                <h3>@ViewBag.glCategory</h3>
+
+                <p>GlCategory</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-th-large"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-maroon">
+            <div class="inner">
+                <h3>@ViewBag.glPosting</h3>
+
+                <p>GlPosting</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-align-left"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-light-blue-gradient">
+            <div class="inner">
+                <h3>@ViewBag.teller</h3>
+
+                <p>Teller</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-align-left"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-purple-gradient">
+            <div class="inner">
+                <h3>@ViewBag.transactionNum</h3>
+
+                <p>Transactions</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-bank"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-lime">
+            <div class="inner">
+                <h3>@ViewBag.unpaidLoan</h3>
+
+                <p>UnPaid Loan</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-money"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+
+
+    if (ViewBag.NoConfig!=null)
+    {
+        if (ViewBag.OpenConfig == true)
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-teal-gradient">
+                    <div class="inner">
+                        <h3>Yes</h3>
+
+                        <p>Is Business Open</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-sign-in"></i>
+                    </div>
+                    <a href="" class="small-box-footer"></a>
+                    @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                             <i class="fa fa-arrow-circle-right"></i>
+                        </a>*@
+                </div>
+            </div>
+        }
+        if (ViewBag.OpenConfig == false)
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua-active">
+                    <div class="inner">
+                        <h3>No</h3>
+
+                        <p>Is Business Open</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-sign-in"></i>
+                    </div>
+                    <a href="" class="small-box-footer"></a>
+                    @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                             <i class="fa fa-arrow-circle-right"></i>
+                        </a>*@
+                </div>
+            </div>
+        }
+        if (ViewBag.ConfigStatusComplete != null)
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-olive-active">
+                    <div class="inner">
+                        <h3>@ViewBag.ConfigStatusComplete</h3>
+
+                        <p>Configuration Status</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <a href="" class="small-box-footer"></a>
+                    @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                             <i class="fa fa-arrow-circle-right"></i>
+                        </a>*@
+                </div>
+            </div>
+        }
+        if (ViewBag.ConfigStatus != null)
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-lime-active">
+                    <div class="inner">
+                        <h3>@ViewBag.ConfigStatus</h3>
+
+                        <p>Configuration Status</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-star-half-empty"></i>
+                    </div>
+                    <a href="" class="small-box-footer"></a>
+                    @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                             <i class="fa fa-arrow-circle-right"></i>
+                        </a>*@
+                </div>
+            </div>
+        }
+    }
+}
+
+@if (Session["role"].ToString() == "Teller")
+{
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua-gradient">
+            <div class="inner">
+                <h3>@ViewBag.deposit</h3>
+
+                <p>Deposit</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sort-amount-asc"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green-gradient">
+            <div class="inner">
+                <h3>@ViewBag.transaction</h3>
+
+                <p>Transactions</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-bank"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-blue-gradient">
+            <div class="inner">
+                <h3>@ViewBag.withdrawal</h3>
+
+                <p>Withdrawal</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sort-amount-desc"></i>
+            </div>
+            <a href="" class="small-box-footer"></a>
+            @*<a href="@Html.Action("Create","GlCategory" )" class="small-box-footer">
+                     <i class="fa fa-arrow-circle-right"></i>
+                </a>*@
+        </div>
+    </div>
+}
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        });
+
+    </script>
+
+}

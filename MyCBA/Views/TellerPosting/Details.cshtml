@@ -1,0 +1,62 @@
+﻿@model MyCBA.Core.Models.TellerPosting
+
+@{
+    ViewBag.Title = "View Teller Posting Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Data.Repositories.CustomerAccountRepository custAcctRepo = new MyCBA.Data.Repositories.CustomerAccountRepository();
+    var getCustAcct = custAcctRepo.GetByAcctNum(Model.customerAcctNum);
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Customer's  Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => getCustAcct.acctName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.customerAcctNum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customerAcctNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Model.Amount.ToString("N02")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.postingType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.postingType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Narration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Narration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TransactionDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+       
+
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("Back To List", "UserPosts")
+    </p>
+</div>

@@ -1,0 +1,1563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.3.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.2.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19446DBB-FF6C-49F3-8073-B383D6576147}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyCBA</RootNamespace>
+    <AssemblyName>MyCBA</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ajax-data-table, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ajax-data-table.1.0.9.1\lib\net\ajax-data-table.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Portable, Version=17.3200.0.14, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Net.Core.17.3.0.14\lib\netstandard2.0\Syncfusion.Compression.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=17.3460.0.14, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.17.3.0.14\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Portable, Version=17.3200.0.14, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.Net.Core.17.3.0.14\lib\netstandard2.0\Syncfusion.XlsIO.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteJs, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RouteJs.Mvc5.2.2.0\lib\net45\RouteJs.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteJs.Mvc5, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RouteJs.Mvc5.2.2.0\lib\net45\RouteJs.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebHelpers.Mvc5, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebHelpers.Mvc5.2.1.0\lib\net45\WebHelpers.Mvc5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\ajax-data-table-icons.png" />
+    <Content Include="Content\ajax-data-table-loader.gif" />
+    <Content Include="Content\ajax-data-table.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\skins\adminlte.css" />
+    <Content Include="Content\css\skins\adminlte.min.css" />
+    <Content Include="Content\css\skins\skin-yellowgreen.css" />
+    <Content Include="Content\css\skins\skin-yellowgreen.min.css" />
+    <Content Include="Content\css\util.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.eot" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.ttf" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff2" />
+    <Content Include="Content\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-BoldItalic.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-Italic.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-LightItalic.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-MediumItalic.ttf" />
+    <Content Include="Content\fonts\ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="Content\css\skins\adminlte.css.map" />
+    <Content Include="Content\css\skins\adminlte.min.css.map" />
+    <None Include="Content\js\plugins\validator\jquery.validate-vsdoc.js" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="Content\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\icon-font.min.css" />
+    <Content Include="Content\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
+    <Content Include="Content\fonts\ubuntu\UFL.txt" />
+    <Content Include="Content\img\bg-011.jpg" />
+    <Content Include="Content\img\bg-01.jpg" />
+    <Content Include="Content\img\icons\favicon.ico" />
+    <Content Include="Content\img\user1.png" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\plugins\validator\jquery.validate.min.js" />
+    <Content Include="Content\js\plugins\validator\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\js\plugins\validator\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\select2\dist\css\select2.css" />
+    <Content Include="Content\select2\dist\css\select2.min.css" />
+    <Content Include="Content\select2\dist\js\i18n\af.js" />
+    <Content Include="Content\select2\dist\js\i18n\ar.js" />
+    <Content Include="Content\select2\dist\js\i18n\az.js" />
+    <Content Include="Content\select2\dist\js\i18n\bg.js" />
+    <Content Include="Content\select2\dist\js\i18n\bn.js" />
+    <Content Include="Content\select2\dist\js\i18n\bs.js" />
+    <Content Include="Content\select2\dist\js\i18n\ca.js" />
+    <Content Include="Content\select2\dist\js\i18n\cs.js" />
+    <Content Include="Content\select2\dist\js\i18n\da.js" />
+    <Content Include="Content\select2\dist\js\i18n\de.js" />
+    <Content Include="Content\select2\dist\js\i18n\dsb.js" />
+    <Content Include="Content\select2\dist\js\i18n\el.js" />
+    <Content Include="Content\select2\dist\js\i18n\en.js" />
+    <Content Include="Content\select2\dist\js\i18n\es.js" />
+    <Content Include="Content\select2\dist\js\i18n\et.js" />
+    <Content Include="Content\select2\dist\js\i18n\eu.js" />
+    <Content Include="Content\select2\dist\js\i18n\fa.js" />
+    <Content Include="Content\select2\dist\js\i18n\fi.js" />
+    <Content Include="Content\select2\dist\js\i18n\fr.js" />
+    <Content Include="Content\select2\dist\js\i18n\gl.js" />
+    <Content Include="Content\select2\dist\js\i18n\he.js" />
+    <Content Include="Content\select2\dist\js\i18n\hi.js" />
+    <Content Include="Content\select2\dist\js\i18n\hr.js" />
+    <Content Include="Content\select2\dist\js\i18n\hsb.js" />
+    <Content Include="Content\select2\dist\js\i18n\hu.js" />
+    <Content Include="Content\select2\dist\js\i18n\hy.js" />
+    <Content Include="Content\select2\dist\js\i18n\id.js" />
+    <Content Include="Content\select2\dist\js\i18n\is.js" />
+    <Content Include="Content\select2\dist\js\i18n\it.js" />
+    <Content Include="Content\select2\dist\js\i18n\ja.js" />
+    <Content Include="Content\select2\dist\js\i18n\ka.js" />
+    <Content Include="Content\select2\dist\js\i18n\km.js" />
+    <Content Include="Content\select2\dist\js\i18n\ko.js" />
+    <Content Include="Content\select2\dist\js\i18n\lt.js" />
+    <Content Include="Content\select2\dist\js\i18n\lv.js" />
+    <Content Include="Content\select2\dist\js\i18n\mk.js" />
+    <Content Include="Content\select2\dist\js\i18n\ms.js" />
+    <Content Include="Content\select2\dist\js\i18n\nb.js" />
+    <Content Include="Content\select2\dist\js\i18n\ne.js" />
+    <Content Include="Content\select2\dist\js\i18n\nl.js" />
+    <Content Include="Content\select2\dist\js\i18n\pl.js" />
+    <Content Include="Content\select2\dist\js\i18n\ps.js" />
+    <Content Include="Content\select2\dist\js\i18n\pt-BR.js" />
+    <Content Include="Content\select2\dist\js\i18n\pt.js" />
+    <Content Include="Content\select2\dist\js\i18n\ro.js" />
+    <Content Include="Content\select2\dist\js\i18n\ru.js" />
+    <Content Include="Content\select2\dist\js\i18n\sk.js" />
+    <Content Include="Content\select2\dist\js\i18n\sl.js" />
+    <Content Include="Content\select2\dist\js\i18n\sq.js" />
+    <Content Include="Content\select2\dist\js\i18n\sr-Cyrl.js" />
+    <Content Include="Content\select2\dist\js\i18n\sr.js" />
+    <Content Include="Content\select2\dist\js\i18n\sv.js" />
+    <Content Include="Content\select2\dist\js\i18n\th.js" />
+    <Content Include="Content\select2\dist\js\i18n\tk.js" />
+    <Content Include="Content\select2\dist\js\i18n\tr.js" />
+    <Content Include="Content\select2\dist\js\i18n\uk.js" />
+    <Content Include="Content\select2\dist\js\i18n\vi.js" />
+    <Content Include="Content\select2\dist\js\i18n\zh-CN.js" />
+    <Content Include="Content\select2\dist\js\i18n\zh-TW.js" />
+    <Content Include="Content\select2\dist\js\select2.full.js" />
+    <Content Include="Content\select2\dist\js\select2.full.min.js" />
+    <Content Include="Content\select2\dist\js\select2.js" />
+    <Content Include="Content\select2\dist\js\select2.min.js" />
+    <Content Include="Content\select2\docs\assets\rtfm-screenshot.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ak.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\al.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ar.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\az.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ca.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\co.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ct.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\de.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\fl.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ga.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\hi.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ia.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\id.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\il.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\in.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ks.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ky.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\la.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ma.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\md.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\me.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\mi.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\mn.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\mo.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ms.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\mt.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nc.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nd.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ne.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nh.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nj.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nm.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\nv.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ny.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\oh.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ok.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\or.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\pa.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ri.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\sc.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\sd.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\tn.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\tx.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\ut.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\va.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\vt.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\wa.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\wi.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\wv.png" />
+    <Content Include="Content\select2\docs\pages\images\flags\wy.png" />
+    <Content Include="Content\select2\docs\pages\images\logo.png" />
+    <Content Include="Content\select2\docs\plugins\anchors\anchors.php" />
+    <Content Include="Content\select2\docs\plugins\anchors\js\anchor.min.js" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\assets\readme_1.png" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\breadcrumbs.php" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\classes\breadcrumbs.php" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\css\breadcrumbs.css" />
+    <Content Include="Content\select2\docs\plugins\error\assets\readme_1.png" />
+    <Content Include="Content\select2\docs\plugins\error\cli\LogCommand.php" />
+    <Content Include="Content\select2\docs\plugins\error\error.php" />
+    <Content Include="Content\select2\docs\plugins\highlight\assets\readme_1.png" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\agate.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\androidstudio.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\arduino-light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\arta.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\ascetic.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-cave.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-cave.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-dune.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-dune.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-estuary.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-estuary.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-forest.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-forest.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-heath.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-heath.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-lakeside.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-lakeside.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-plateau.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-plateau.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-savanna.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-savanna.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-seaside.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-seaside.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-sulphurpool.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\atelier-sulphurpool.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\brown-paper.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\codepen-embed.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\color-brewer.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\darkula.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\default.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\docco.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\far.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\foundation.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\github-gist.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\github.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\googlecode.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\grayscale.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\hopscotch.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\hybrid.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\idea.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\ir-black.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\kimbie.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\kimbie.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\learn.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\magula.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\mono-blue.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\monokai-sublime.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\monokai.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\obsidian.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\paraiso-dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\paraiso-light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\paraiso.dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\paraiso.light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\pojoaque.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\railscasts.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\rainbow.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\school-book.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\solarized-dark.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\solarized-light.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\sunburst.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\tomorrow-night-blue.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\tomorrow-night-bright.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\tomorrow-night-eighties.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\tomorrow-night.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\tomorrow.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\vs.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\xcode.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\css\zenburn.css" />
+    <Content Include="Content\select2\docs\plugins\highlight\highlight.php" />
+    <Content Include="Content\select2\docs\plugins\highlight\js\highlight.pack.js" />
+    <Content Include="Content\select2\docs\plugins\highlight\js\highlightjs-line-numbers.min.js" />
+    <Content Include="Content\select2\docs\plugins\problems\assets\readme_1.png" />
+    <Content Include="Content\select2\docs\plugins\problems\css\problems.css" />
+    <Content Include="Content\select2\docs\plugins\problems\css\template.css" />
+    <Content Include="Content\select2\docs\plugins\problems\html\problems.html" />
+    <Content Include="Content\select2\docs\plugins\problems\problems.php" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\assets\readme_1.png" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\assets\search.svg" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\css\simplesearch.css" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\js\simplesearch.js" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\simplesearch.php" />
+    <Content Include="Content\select2\docs\screenshot.jpg" />
+    <Content Include="Content\select2\docs\themes\learn2\css-compiled\nucleus.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css-compiled\theme.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css\featherlight.min.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css\font-awesome.min.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css\nucleus-ie10.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css\nucleus-ie9.css" />
+    <Content Include="Content\select2\docs\themes\learn2\css\pure-0.5.0\grids-min.css" />
+    <Content Include="Content\select2\docs\themes\learn2\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\select2\docs\themes\learn2\images\clippy.svg" />
+    <Content Include="Content\select2\docs\themes\learn2\images\favicon.png" />
+    <Content Include="Content\select2\docs\themes\learn2\images\logo.png" />
+    <Content Include="Content\select2\docs\themes\learn2\js\clipboard.min.js" />
+    <Content Include="Content\select2\docs\themes\learn2\js\featherlight.min.js" />
+    <Content Include="Content\select2\docs\themes\learn2\js\html5shiv-printshiv.min.js" />
+    <Content Include="Content\select2\docs\themes\learn2\js\jquery.scrollbar.min.js" />
+    <Content Include="Content\select2\docs\themes\learn2\js\learn.js" />
+    <Content Include="Content\select2\docs\themes\learn2\js\modernizr.custom.71422.js" />
+    <Content Include="Content\select2\docs\themes\learn2\learn2.php" />
+    <Content Include="Content\select2\docs\themes\learn2\screenshot.jpg" />
+    <Content Include="Content\select2\docs\themes\learn2\thumbnail.jpg" />
+    <Content Include="Content\select2\docs\themes\site\css\s2-docs.css" />
+    <Content Include="Content\select2\docs\themes\site\css\theme.css" />
+    <Content Include="Content\select2\docs\themes\site\images\android-chrome-36x36.png" />
+    <Content Include="Content\select2\docs\themes\site\images\android-chrome-48x48.png" />
+    <Content Include="Content\select2\docs\themes\site\images\android-chrome-72x72.png" />
+    <Content Include="Content\select2\docs\themes\site\images\apple-touch-icon-57x57.png" />
+    <Content Include="Content\select2\docs\themes\site\images\apple-touch-icon-60x60.png" />
+    <Content Include="Content\select2\docs\themes\site\images\apple-touch-icon-72x72.png" />
+    <Content Include="Content\select2\docs\themes\site\images\apple-touch-icon-precomposed.png" />
+    <Content Include="Content\select2\docs\themes\site\images\apple-touch-icon.png" />
+    <Content Include="Content\select2\docs\themes\site\images\favicon-16x16.png" />
+    <Content Include="Content\select2\docs\themes\site\images\favicon-32x32.png" />
+    <Content Include="Content\select2\docs\themes\site\images\favicon.ico" />
+    <Content Include="Content\select2\docs\themes\site\images\favicon.png" />
+    <Content Include="Content\select2\docs\themes\site\images\mstile-150x150.png" />
+    <Content Include="Content\select2\docs\themes\site\images\mstile-310x150.png" />
+    <Content Include="Content\select2\docs\themes\site\images\mstile-70x70.png" />
+    <Content Include="Content\select2\docs\themes\site\images\safari-pinned-tab.svg" />
+    <Content Include="Content\select2\docs\themes\site\js\data-fill-from.js" />
+    <Content Include="Content\select2\Gruntfile.js" />
+    <Content Include="Content\select2\src\js\banner.end.js" />
+    <Content Include="Content\select2\src\js\banner.start.js" />
+    <Content Include="Content\select2\src\js\jquery.mousewheel.shim.js" />
+    <Content Include="Content\select2\src\js\jquery.select2.js" />
+    <Content Include="Content\select2\src\js\jquery.shim.js" />
+    <Content Include="Content\select2\src\js\select2\compat\containerCss.js" />
+    <Content Include="Content\select2\src\js\select2\compat\dropdownCss.js" />
+    <Content Include="Content\select2\src\js\select2\compat\initSelection.js" />
+    <Content Include="Content\select2\src\js\select2\compat\inputData.js" />
+    <Content Include="Content\select2\src\js\select2\compat\matcher.js" />
+    <Content Include="Content\select2\src\js\select2\compat\query.js" />
+    <Content Include="Content\select2\src\js\select2\compat\utils.js" />
+    <Content Include="Content\select2\src\js\select2\core.js" />
+    <Content Include="Content\select2\src\js\select2\data\ajax.js" />
+    <Content Include="Content\select2\src\js\select2\data\array.js" />
+    <Content Include="Content\select2\src\js\select2\data\base.js" />
+    <Content Include="Content\select2\src\js\select2\data\maximumInputLength.js" />
+    <Content Include="Content\select2\src\js\select2\data\maximumSelectionLength.js" />
+    <Content Include="Content\select2\src\js\select2\data\minimumInputLength.js" />
+    <Content Include="Content\select2\src\js\select2\data\select.js" />
+    <Content Include="Content\select2\src\js\select2\data\tags.js" />
+    <Content Include="Content\select2\src\js\select2\data\tokenizer.js" />
+    <Content Include="Content\select2\src\js\select2\defaults.js" />
+    <Content Include="Content\select2\src\js\select2\diacritics.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\attachBody.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\attachContainer.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\closeOnSelect.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\hidePlaceholder.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\infiniteScroll.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\minimumResultsForSearch.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\search.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\selectOnClose.js" />
+    <Content Include="Content\select2\src\js\select2\dropdown\stopPropagation.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\af.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ar.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\az.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\bg.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\bn.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\bs.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ca.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\cs.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\da.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\de.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\dsb.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\el.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\en.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\es.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\et.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\eu.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\fa.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\fi.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\fr.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\gl.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\he.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\hi.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\hr.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\hsb.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\hu.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\hy.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\id.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\is.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\it.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ja.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ka.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\km.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ko.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\lt.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\lv.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\mk.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ms.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\nb.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ne.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\nl.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\pl.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ps.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\pt-BR.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\pt.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ro.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\ru.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sk.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sl.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sq.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sr-Cyrl.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sr.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\sv.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\th.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\tk.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\tr.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\uk.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\vi.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\zh-CN.js" />
+    <Content Include="Content\select2\src\js\select2\i18n\zh-TW.js" />
+    <Content Include="Content\select2\src\js\select2\keys.js" />
+    <Content Include="Content\select2\src\js\select2\options.js" />
+    <Content Include="Content\select2\src\js\select2\results.js" />
+    <Content Include="Content\select2\src\js\select2\selection\allowClear.js" />
+    <Content Include="Content\select2\src\js\select2\selection\base.js" />
+    <Content Include="Content\select2\src\js\select2\selection\clickMask.js" />
+    <Content Include="Content\select2\src\js\select2\selection\eventRelay.js" />
+    <Content Include="Content\select2\src\js\select2\selection\multiple.js" />
+    <Content Include="Content\select2\src\js\select2\selection\placeholder.js" />
+    <Content Include="Content\select2\src\js\select2\selection\search.js" />
+    <Content Include="Content\select2\src\js\select2\selection\single.js" />
+    <Content Include="Content\select2\src\js\select2\selection\stopPropagation.js" />
+    <Content Include="Content\select2\src\js\select2\translation.js" />
+    <Content Include="Content\select2\src\js\select2\utils.js" />
+    <Content Include="Content\select2\src\js\wrapper.end.js" />
+    <Content Include="Content\select2\src\js\wrapper.start.js" />
+    <Content Include="Content\select2\tests\a11y\selection-tests.js" />
+    <Content Include="Content\select2\tests\data\array-tests.js" />
+    <Content Include="Content\select2\tests\data\base-tests.js" />
+    <Content Include="Content\select2\tests\data\inputData-tests.js" />
+    <Content Include="Content\select2\tests\data\maximumInputLength-tests.js" />
+    <Content Include="Content\select2\tests\data\maximumSelectionLength-tests.js" />
+    <Content Include="Content\select2\tests\data\minimumInputLength-tests.js" />
+    <Content Include="Content\select2\tests\data\select-tests.js" />
+    <Content Include="Content\select2\tests\data\tags-tests.js" />
+    <Content Include="Content\select2\tests\data\tokenizer-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\dropdownCss-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\dropdownParent-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\positioning-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\search-a11y-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\selectOnClose-tests.js" />
+    <Content Include="Content\select2\tests\dropdown\stopPropagation-tests.js" />
+    <Content Include="Content\select2\tests\helpers.js" />
+    <Content Include="Content\select2\tests\integration-jq1.html" />
+    <Content Include="Content\select2\tests\integration-jq2.html" />
+    <Content Include="Content\select2\tests\integration-jq3.html" />
+    <Content Include="Content\select2\tests\integration\dom-changes.js" />
+    <Content Include="Content\select2\tests\integration\jquery-calls.js" />
+    <Content Include="Content\select2\tests\integration\select2-methods.js" />
+    <Content Include="Content\select2\tests\options\ajax-tests.js" />
+    <Content Include="Content\select2\tests\options\data-tests.js" />
+    <Content Include="Content\select2\tests\options\deprecated-tests.js" />
+    <Content Include="Content\select2\tests\options\translation-tests.js" />
+    <Content Include="Content\select2\tests\options\width-tests.js" />
+    <Content Include="Content\select2\tests\results\a11y-tests.js" />
+    <Content Include="Content\select2\tests\results\focusing-tests.js" />
+    <Content Include="Content\select2\tests\results\infiniteScroll-tests.js" />
+    <Content Include="Content\select2\tests\results\option-tests.js" />
+    <Content Include="Content\select2\tests\selection\allowClear-tests.js" />
+    <Content Include="Content\select2\tests\selection\containerCss-tests.js" />
+    <Content Include="Content\select2\tests\selection\focusing-tests.js" />
+    <Content Include="Content\select2\tests\selection\multiple-tests.js" />
+    <Content Include="Content\select2\tests\selection\placeholder-tests.js" />
+    <Content Include="Content\select2\tests\selection\search-a11y-tests.js" />
+    <Content Include="Content\select2\tests\selection\search-placeholder-tests.js" />
+    <Content Include="Content\select2\tests\selection\search-tests.js" />
+    <Content Include="Content\select2\tests\selection\single-tests.js" />
+    <Content Include="Content\select2\tests\selection\stopPropagation-tests.js" />
+    <Content Include="Content\select2\tests\unit-jq1.html" />
+    <Content Include="Content\select2\tests\unit-jq2.html" />
+    <Content Include="Content\select2\tests\unit-jq3.html" />
+    <Content Include="Content\select2\tests\utils\data-tests.js" />
+    <Content Include="Content\select2\tests\utils\decorator-tests.js" />
+    <Content Include="Content\select2\tests\utils\escapeMarkup-tests.js" />
+    <Content Include="Content\select2\tests\vendor\jquery-1.7.2.js" />
+    <Content Include="Content\select2\tests\vendor\jquery-2.2.4.js" />
+    <Content Include="Content\select2\tests\vendor\jquery-3.4.1.js" />
+    <Content Include="Content\select2\tests\vendor\qunit-1.23.1.css" />
+    <Content Include="Content\select2\tests\vendor\qunit-1.23.1.js" />
+    <Content Include="Content\vendor\animate\animate.css" />
+    <Content Include="Content\vendor\animsition\css\animsition.css" />
+    <Content Include="Content\vendor\animsition\css\animsition.min.css" />
+    <Content Include="Content\vendor\animsition\js\animsition.js" />
+    <Content Include="Content\vendor\animsition\js\animsition.min.js" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="Content\vendor\countdowntime\countdowntime.js" />
+    <Content Include="Content\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="Content\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Content\vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\vendor\daterangepicker\moment.js" />
+    <Content Include="Content\vendor\daterangepicker\moment.min.js" />
+    <Content Include="Content\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Content\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="Content\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Content\vendor\select2\select2.css" />
+    <Content Include="Content\vendor\select2\select2.js" />
+    <Content Include="Content\vendor\select2\select2.min.css" />
+    <Content Include="Content\vendor\select2\select2.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\ajax-data-table.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\select2\.editorconfig" />
+    <Content Include="Content\select2\.github\CONTRIBUTING.md" />
+    <Content Include="Content\select2\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\select2\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Content\select2\.github\stale.yml" />
+    <Content Include="Content\select2\.github\workflows\docs-deploy.yml" />
+    <Content Include="Content\select2\.github\workflows\main.yml" />
+    <Content Include="Content\select2\.github\workflows\package-deploy.yml" />
+    <Content Include="Content\select2\.gitignore" />
+    <Content Include="Content\select2\.jshintignore" />
+    <Content Include="Content\select2\.jshintrc" />
+    <Content Include="Content\select2\.travis.yml" />
+    <Content Include="Content\select2\bower.json" />
+    <Content Include="Content\select2\CHANGELOG.md" />
+    <Content Include="Content\select2\component.json" />
+    <Content Include="Content\select2\composer.json" />
+    <Content Include="Content\select2\docs\accounts\.gitkeep" />
+    <Content Include="Content\select2\docs\blueprints.yaml" />
+    <Content Include="Content\select2\docs\config\plugins\anchors.yaml" />
+    <Content Include="Content\select2\docs\config\plugins\highlight.yaml" />
+    <Content Include="Content\select2\docs\config\plugins\simplesearch.yaml" />
+    <Content Include="Content\select2\docs\config\site.yaml" />
+    <Content Include="Content\select2\docs\config\system.yaml" />
+    <Content Include="Content\select2\docs\data\.gitkeep" />
+    <Content Include="Content\select2\docs\LICENSE.md" />
+    <Content Include="Content\select2\docs\localhost\config\security.yaml" />
+    <Content Include="Content\select2\docs\localhost\config\system.yaml" />
+    <Content Include="Content\select2\docs\pages\01.getting-started\01.installation\docs.md" />
+    <Content Include="Content\select2\docs\pages\01.getting-started\02.basic-usage\docs.md" />
+    <Content Include="Content\select2\docs\pages\01.getting-started\03.builds-and-modules\docs.md" />
+    <Content Include="Content\select2\docs\pages\01.getting-started\chapter.md" />
+    <Content Include="Content\select2\docs\pages\02.troubleshooting\01.getting-help\docs.md" />
+    <Content Include="Content\select2\docs\pages\02.troubleshooting\02.common-problems\docs.md" />
+    <Content Include="Content\select2\docs\pages\02.troubleshooting\chapter.md" />
+    <Content Include="Content\select2\docs\pages\03.configuration\01.options-api\docs.md" />
+    <Content Include="Content\select2\docs\pages\03.configuration\02.defaults\docs.md" />
+    <Content Include="Content\select2\docs\pages\03.configuration\03.data-attributes\docs.md" />
+    <Content Include="Content\select2\docs\pages\03.configuration\docs.md" />
+    <Content Include="Content\select2\docs\pages\04.appearance\docs.md" />
+    <Content Include="Content\select2\docs\pages\05.options\docs.md" />
+    <Content Include="Content\select2\docs\pages\06.data-sources\01.formats\docs.md" />
+    <Content Include="Content\select2\docs\pages\06.data-sources\02.ajax\docs.md" />
+    <Content Include="Content\select2\docs\pages\06.data-sources\03.arrays\docs.md" />
+    <Content Include="Content\select2\docs\pages\06.data-sources\chapter.md" />
+    <Content Include="Content\select2\docs\pages\07.dropdown\docs.md" />
+    <Content Include="Content\select2\docs\pages\08.selections\docs.md" />
+    <Content Include="Content\select2\docs\pages\09.tagging\docs.md" />
+    <Content Include="Content\select2\docs\pages\10.placeholders\docs.md" />
+    <Content Include="Content\select2\docs\pages\11.searching\docs.md" />
+    <Content Include="Content\select2\docs\pages\12.programmatic-control\01.add-select-clear-items\docs.md" />
+    <Content Include="Content\select2\docs\pages\12.programmatic-control\02.retrieving-selections\docs.md" />
+    <Content Include="Content\select2\docs\pages\12.programmatic-control\03.methods\docs.md" />
+    <Content Include="Content\select2\docs\pages\12.programmatic-control\04.events\docs.md" />
+    <Content Include="Content\select2\docs\pages\12.programmatic-control\chapter.md" />
+    <Content Include="Content\select2\docs\pages\13.i18n\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\01.adapters-and-decorators\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\01.selection\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\02.array\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\03.ajax\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\04.data\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\05.results\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\06.dropdown\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\02.default-adapters\docs.md" />
+    <Content Include="Content\select2\docs\pages\14.advanced\chapter.md" />
+    <Content Include="Content\select2\docs\pages\15.upgrading\01.new-in-40\docs.md" />
+    <Content Include="Content\select2\docs\pages\15.upgrading\02.migrating-from-35\docs.md" />
+    <Content Include="Content\select2\docs\pages\15.upgrading\chapter.md" />
+    <Content Include="Content\select2\docs\plugins\.gitkeep" />
+    <Content Include="Content\select2\docs\plugins\anchors\anchors.yaml" />
+    <Content Include="Content\select2\docs\plugins\anchors\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\anchors\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\anchors\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\anchors\README.md" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\breadcrumbs.yaml" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\README.md" />
+    <Content Include="Content\select2\docs\plugins\breadcrumbs\templates\partials\breadcrumbs.html.twig" />
+    <Content Include="Content\select2\docs\plugins\error\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\error\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\error\error.yaml" />
+    <Content Include="Content\select2\docs\plugins\error\languages.yaml" />
+    <Content Include="Content\select2\docs\plugins\error\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\error\pages\error.md" />
+    <Content Include="Content\select2\docs\plugins\error\README.md" />
+    <Content Include="Content\select2\docs\plugins\error\templates\error.html.twig" />
+    <Content Include="Content\select2\docs\plugins\error\templates\error.json.twig" />
+    <Content Include="Content\select2\docs\plugins\highlight\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\highlight\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\highlight\highlight.yaml" />
+    <Content Include="Content\select2\docs\plugins\highlight\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\highlight\README.md" />
+    <Content Include="Content\select2\docs\plugins\problems\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\problems\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\problems\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\problems\problems.yaml" />
+    <Content Include="Content\select2\docs\plugins\problems\README.md" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\blueprints.yaml" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\languages.yaml" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\LICENSE" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\pages\simplesearch.md" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\README.md" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\simplesearch.yaml" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\templates\partials\simplesearch_base.html.twig" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\templates\partials\simplesearch_item.html.twig" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\templates\partials\simplesearch_searchbox.html.twig" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\templates\simplesearch_results.html.twig" />
+    <Content Include="Content\select2\docs\plugins\simplesearch\templates\simplesearch_results.json.twig" />
+    <Content Include="Content\select2\docs\README.md" />
+    <Content Include="Content\select2\docs\themes\.gitkeep" />
+    <Content Include="Content\select2\docs\themes\learn2\blueprints.yaml" />
+    <Content Include="Content\select2\docs\themes\learn2\blueprints\chapter.yaml" />
+    <Content Include="Content\select2\docs\themes\learn2\blueprints\docs.yaml" />
+    <Content Include="Content\select2\docs\themes\learn2\CHANGELOG.md" />
+    <Content Include="Content\select2\docs\themes\learn2\css-compiled\nucleus.css.map" />
+    <Content Include="Content\select2\docs\themes\learn2\css-compiled\theme.css.map" />
+    <Content Include="Content\select2\docs\themes\learn2\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\select2\docs\themes\learn2\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\select2\docs\themes\learn2\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\select2\docs\themes\learn2\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\select2\docs\themes\learn2\languages.yaml" />
+    <Content Include="Content\select2\docs\themes\learn2\learn2.yaml" />
+    <Content Include="Content\select2\docs\themes\learn2\LICENSE" />
+    <Content Include="Content\select2\docs\themes\learn2\README.md" />
+    <Content Include="Content\select2\docs\themes\learn2\scss.sh" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_base.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_breakpoints.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_core.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_layout.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_nav.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\nucleus\_typography.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\theme\_base.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\theme\_bullets.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\configuration\theme\_colors.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\functions\_base.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\functions\_direction.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\functions\_range.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\mixins\_base.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\mixins\_breakpoints.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\mixins\_utilities.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\particles\_align-text.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\particles\_visibility.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\_core.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\_flex.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\_forms.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\nucleus\_typography.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\modules\_base.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\modules\_buttons.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_bullets.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_buttons.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_configuration.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_core.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_custom.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_fonts.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_forms.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_header.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_main.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_nav.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_scrollbar.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_tables.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_tooltips.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\theme\_typography.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_button.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_clearfix.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_directional-values.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_ellipsis.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_font-family.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_hide-text.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_html5-input-types.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_position.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_prefixer.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_rem.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_retina-image.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_size.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_timing-functions.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_triangle.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\addons\_word-wrap.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_animation.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_appearance.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_backface-visibility.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_background-image.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_background.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_border-image.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_border-radius.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_box-sizing.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_calc.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_columns.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_filter.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_flex-box.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_font-face.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_font-feature-settings.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_hidpi-media-query.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_hyphens.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_image-rendering.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_keyframes.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_linear-gradient.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_perspective.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_placeholder.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_radial-gradient.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_transform.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_transition.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\css3\_user-select.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_assign.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_color-lightness.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_flex-grid.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_golden-ratio.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_grid-width.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_modular-scale.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_px-to-em.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_px-to-rem.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_strip-units.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_tint-shade.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_transition-property-name.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\functions\_unpack.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_convert-units.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_gradient-positions-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_is-num.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_linear-angle-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_linear-gradient-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_linear-positions-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_linear-side-corner-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_radial-arg-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_radial-gradient-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_radial-positions-parser.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_render-gradients.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_shape-size-stripper.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\helpers\_str-to-num.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\settings\_prefixer.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\settings\_px-to-em.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\_bourbon-deprecated-upcoming.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\bourbon\_bourbon.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_cmyk.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_color-adjustments.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_color-schemer.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_colorblind.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_comparison.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_equalize.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_harmonize.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_interpolation.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_mix.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_mixins.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_ryb.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\color-schemer\_tint-shade.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\scss\vendor\color-schemer\_color-schemer.scss" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\chapter.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\default.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\docs.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\error.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\analytics.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\base.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\github_link.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\github_note.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\logo.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\metadata.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\page.html.twig" />
+    <Content Include="Content\select2\docs\themes\learn2\templates\partials\sidebar.html.twig" />
+    <Content Include="Content\select2\docs\themes\site\images\manifest.json" />
+    <Content Include="Content\select2\docs\themes\site\site.yaml" />
+    <Content Include="Content\select2\docs\themes\site\templates\partials\base.html.twig" />
+    <Content Include="Content\select2\docs\themes\site\templates\partials\js\source-states.html.twig" />
+    <Content Include="Content\select2\docs\themes\site\templates\partials\logo.html.twig" />
+    <Content Include="Content\select2\docs\themes\site\templates\partials\sidebar.html.twig" />
+    <Content Include="Content\select2\LICENSE.md" />
+    <Content Include="Content\select2\package.json" />
+    <Content Include="Content\select2\README.md" />
+    <Content Include="Content\select2\src\scss\core.scss" />
+    <Content Include="Content\select2\src\scss\mixins\_gradients.scss" />
+    <Content Include="Content\select2\src\scss\theme\classic\layout.scss" />
+    <Content Include="Content\select2\src\scss\theme\classic\_defaults.scss" />
+    <Content Include="Content\select2\src\scss\theme\classic\_multiple.scss" />
+    <Content Include="Content\select2\src\scss\theme\classic\_single.scss" />
+    <Content Include="Content\select2\src\scss\theme\default\layout.scss" />
+    <Content Include="Content\select2\src\scss\theme\default\_multiple.scss" />
+    <Content Include="Content\select2\src\scss\theme\default\_single.scss" />
+    <Content Include="Content\select2\src\scss\_dropdown.scss" />
+    <Content Include="Content\select2\src\scss\_multiple.scss" />
+    <Content Include="Content\select2\src\scss\_single.scss" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Loginn.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\GlCategory\Create.cshtml" />
+    <Content Include="Views\GlCategory\Index.cshtml" />
+    <Content Include="Views\GlAccount\Create.cshtml" />
+    <Content Include="Views\GlAccount\Index.cshtml" />
+    <Content Include="Views\GlAccount\Edit.cshtml" />
+    <Content Include="Views\GlAccount\Details.cshtml" />
+    <Content Include="Views\CustomerAccount\Create.cshtml" />
+    <Content Include="Views\CustomerAccount\Index.cshtml" />
+    <Content Include="Views\CustomerAccount\Details.cshtml" />
+    <Content Include="Views\CustomerAccount\Edit.cshtml" />
+    <Content Include="Views\AccountConfiguration\Savings.cshtml" />
+    <Content Include="Views\AccountConfiguration\UpdateSavings.cshtml" />
+    <Content Include="Views\AccountConfiguration\Current.cshtml" />
+    <Content Include="Views\AccountConfiguration\UpdateCurrent.cshtml" />
+    <Content Include="Views\AccountConfiguration\Loan.cshtml" />
+    <Content Include="Views\AccountConfiguration\UpdateLoan.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\CustomerAccount\OpenLoanAccount.cshtml" />
+    <Content Include="Views\FinancialReport\BalanceSheet.cshtml" />
+    <Content Include="Views\CustomerAccount\ViewLoanAccount.cshtml" />
+    <Content Include="Views\FinancialReport\ProfitLoss.cshtml" />
+    <Content Include="Views\CustomerAccount\LoanDetails.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\EOD\Index.cshtml" />
+    <Content Include="Views\Customer\OpenAccount.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\AccountConfiguration\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
+    <Content Include="Views\CustomerAccount\TakeLoan.cshtml" />
+    <Content Include="Views\AtmTerminal\Create.cshtml" />
+    <Content Include="Views\AtmTerminal\Edit.cshtml" />
+    <Content Include="Views\AtmTerminal\Index.cshtml" />
+    <None Include="Views\FinancialReport\TrialBalance.cshtml" />
+    <None Include="Views\GlCategory\Details.cshtml" />
+    <Content Include="Views\GlCategory\Edit.cshtml" />
+    <Content Include="Views\Teller\Index.cshtml" />
+    <Content Include="Views\Teller\Details.cshtml" />
+    <Content Include="Views\Teller\AssignTillAccount.cshtml" />
+    <Content Include="Views\GlPosting\Index.cshtml" />
+    <None Include="Views\GlPosting\Create.cshtml" />
+    <Content Include="Views\GlPosting\Details.cshtml" />
+    <Content Include="Views\TellerPosting\Details.cshtml" />
+    <Content Include="Views\TellerPosting\Index.cshtml" />
+    <Content Include="Views\TellerPosting\Create.cshtml" />
+    <Content Include="Views\TellerPosting\UserPosts.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\TellerPosting\Post.cshtml" />
+    <Content Include="Views\Node\Create.cshtml" />
+    <Content Include="Views\Node\Edit.cshtml" />
+    <Content Include="Views\Node\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountConfigurationController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AtmTerminalController.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\CustomerAccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EODController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FinancialReportController.cs" />
+    <Compile Include="Controllers\GlAccountController.cs" />
+    <Compile Include="Controllers\GlCategoryController.cs" />
+    <Compile Include="Controllers\GlPostingController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NodeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TellerController.cs" />
+    <Compile Include="Controllers\TellerPostingController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ErrorLogger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ChangeUserPasswordViewModels.cs" />
+    <Compile Include="ViewModels\CustomerAccountViewModels.cs" />
+    <Compile Include="ViewModels\GlAccountViewModels.cs" />
+    <Compile Include="ViewModels\GlCategoryViewModels.cs" />
+    <Compile Include="ViewModels\CurrentAcctMgtViewModels.cs" />
+    <Compile Include="ViewModels\GlPostingViewModels.cs" />
+    <Compile Include="ViewModels\LiabilityViewModel.cs" />
+    <Compile Include="ViewModels\LoanAcctMgtViewModels.cs" />
+    <Compile Include="ViewModels\SavingsAcctMgtViewModels.cs" />
+    <Compile Include="ViewModels\TellerPostingViewModels.cs" />
+    <Compile Include="ViewModels\TellerViewModels.cs" />
+    <Compile Include="ViewModels\UserViewModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Content\css\AdminLTE.css" />
+    <Content Include="Content\css\AdminLTE.min.css" />
+    <Content Include="Content\css\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-select.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\icheck\aero.css" />
+    <Content Include="Content\css\icheck\aero.min.css" />
+    <Content Include="Content\css\icheck\blue.css" />
+    <Content Include="Content\css\icheck\blue.min.css" />
+    <Content Include="Content\css\icheck\green.css" />
+    <Content Include="Content\css\icheck\green.min.css" />
+    <Content Include="Content\css\icheck\grey.css" />
+    <Content Include="Content\css\icheck\grey.min.css" />
+    <Content Include="Content\css\icheck\minimal.css" />
+    <Content Include="Content\css\icheck\minimal.min.css" />
+    <Content Include="Content\css\icheck\orange.css" />
+    <Content Include="Content\css\icheck\orange.min.css" />
+    <Content Include="Content\css\icheck\pink.css" />
+    <Content Include="Content\css\icheck\pink.min.css" />
+    <Content Include="Content\css\icheck\purple.css" />
+    <Content Include="Content\css\icheck\purple.min.css" />
+    <Content Include="Content\css\icheck\red.css" />
+    <Content Include="Content\css\icheck\red.min.css" />
+    <Content Include="Content\css\icheck\yellow.css" />
+    <Content Include="Content\css\icheck\yellow.min.css" />
+    <Content Include="Content\css\skins\skin-black-light.css" />
+    <Content Include="Content\css\skins\skin-black-light.min.css" />
+    <Content Include="Content\css\skins\skin-black.css" />
+    <Content Include="Content\css\skins\skin-black.min.css" />
+    <Content Include="Content\css\skins\skin-blue-light.css" />
+    <Content Include="Content\css\skins\skin-blue-light.min.css" />
+    <Content Include="Content\css\skins\skin-blue.css" />
+    <Content Include="Content\css\skins\skin-blue.min.css" />
+    <Content Include="Content\css\skins\skin-green-light.css" />
+    <Content Include="Content\css\skins\skin-green-light.min.css" />
+    <Content Include="Content\css\skins\skin-green.css" />
+    <Content Include="Content\css\skins\skin-green.min.css" />
+    <Content Include="Content\css\skins\skin-purple-light.css" />
+    <Content Include="Content\css\skins\skin-purple-light.min.css" />
+    <Content Include="Content\css\skins\skin-purple.css" />
+    <Content Include="Content\css\skins\skin-purple.min.css" />
+    <Content Include="Content\css\skins\skin-red-light.css" />
+    <Content Include="Content\css\skins\skin-red-light.min.css" />
+    <Content Include="Content\css\skins\skin-red.css" />
+    <Content Include="Content\css\skins\skin-red.min.css" />
+    <Content Include="Content\css\skins\skin-yellow-light.css" />
+    <Content Include="Content\css\skins\skin-yellow-light.min.css" />
+    <Content Include="Content\css\skins\skin-yellow.css" />
+    <Content Include="Content\css\skins\skin-yellow.min.css" />
+    <Content Include="Content\css\skins\_all-skins.css" />
+    <Content Include="Content\css\skins\_all-skins.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\img\user.jpg" />
+    <Content Include="Content\img\icheck\aero.png" />
+    <Content Include="Content\img\icheck\aero@2x.png" />
+    <Content Include="Content\img\icheck\blue.png" />
+    <Content Include="Content\img\icheck\blue@2x.png" />
+    <Content Include="Content\img\icheck\green.png" />
+    <Content Include="Content\img\icheck\green@2x.png" />
+    <Content Include="Content\img\icheck\grey.png" />
+    <Content Include="Content\img\icheck\grey@2x.png" />
+    <Content Include="Content\img\icheck\minimal.png" />
+    <Content Include="Content\img\icheck\minimal@2x.png" />
+    <Content Include="Content\img\icheck\orange.png" />
+    <Content Include="Content\img\icheck\orange@2x.png" />
+    <Content Include="Content\img\icheck\pink.png" />
+    <Content Include="Content\img\icheck\pink@2x.png" />
+    <Content Include="Content\img\icheck\purple.png" />
+    <Content Include="Content\img\icheck\purple@2x.png" />
+    <Content Include="Content\img\icheck\red.png" />
+    <Content Include="Content\img\icheck\red@2x.png" />
+    <Content Include="Content\img\icheck\yellow.png" />
+    <Content Include="Content\img\icheck\yellow@2x.png" />
+    <Content Include="Content\js\adminlte.js" />
+    <Content Include="Content\js\init.js" />
+    <Content Include="Content\js\plugins\bootstrap\bootstrap.js" />
+    <Content Include="Content\js\plugins\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\js\plugins\bootstrap-select\bootstrap-select.js" />
+    <Content Include="Content\js\plugins\bootstrap-select\bootstrap-select.min.js" />
+    <Content Include="Content\js\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\js\plugins\datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\plugins\fastclick\fastclick.js" />
+    <Content Include="Content\js\plugins\fastclick\fastclick.min.js" />
+    <Content Include="Content\js\plugins\icheck\icheck.js" />
+    <Content Include="Content\js\plugins\icheck\icheck.min.js" />
+    <Content Include="Content\js\plugins\inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="Content\js\plugins\inputmask\jquery.inputmask.bundle.min.js" />
+    <Content Include="Content\js\plugins\jquery\jquery-3.3.1.js" />
+    <Content Include="Content\js\plugins\jquery\jquery-3.3.1.min.js" />
+    <Content Include="Content\js\plugins\moment\moment.js" />
+    <Content Include="Content\js\plugins\moment\moment.min.js" />
+    <Content Include="Content\js\plugins\slimscroll\jquery.slimscroll.js" />
+    <Content Include="Content\js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Content\js\plugins\validator\validator.js" />
+    <Content Include="Content\js\plugins\validator\validator.min.js" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_ControlSidebar.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CBA.Model\MyCBA.Core.csproj">
+      <Project>{2542686e-95a4-4fa0-b891-2174da2fcd5f}</Project>
+      <Name>MyCBA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyCBA.Data\MyCBA.Data.csproj">
+      <Project>{4815c779-0831-4dd7-8359-9abe7469313d}</Project>
+      <Name>MyCBA.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyCBA.Logic\MyCBA.Logic.csproj">
+      <Project>{7840475D-6B05-4020-94B1-227353F5549D}</Project>
+      <Name>MyCBA.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.2.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
+</Project>

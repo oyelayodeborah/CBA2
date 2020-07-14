@@ -1,0 +1,151 @@
+﻿@model MyCBA.ViewModels.GlPostingViewModels
+@{
+    ViewBag.Title = "Post transactions into GL Accounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    MyCBA.Core.Models.ApplicationDbContext _context = new MyCBA.Core.Models.ApplicationDbContext();
+    var IsBusinessOpened = _context.BusinessConfigs.Where(c => c.IsBusinessOpen == true).FirstOrDefault();
+    var businessConfig = _context.BusinessConfigs.ToList();
+    if (businessConfig.Count == 0)
+    {
+        <p>Business Configuration is not yet setup</p>
+    }
+    else
+    {
+        if (IsBusinessOpened != null)
+        {
+
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+        <div class="form-horizontal col-md-6">
+            @if (ViewBag.Message!=null)
+            {
+                if (ViewBag.Message == "Error")
+                {
+                    <div class="alert alert-danger">
+                        <strong>Error!&nbsp;</strong> @ViewBag.Message
+                    </div>
+                }
+                else if (ViewBag.Message == "Success")
+                {
+                    <div class="alert alert-success">
+                        <strong>Success!&nbsp;</strong> @ViewBag.Message
+                    </div>
+                }
+                else if (ViewBag.Message == "Insufficient Balance")
+                {
+                    <div class="alert alert-danger">
+                        <strong>Account balance is insufficient to complete this transaction&nbsp;</strong>
+                    </div>
+                }
+                else if (ViewBag.Message == "Same Account")
+                {
+                    <div class="alert alert-danger">
+                        <strong>You can not debit and credit the same account&nbsp;</strong>
+                    </div>
+                }
+            }
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <span id="error" class="text-red"></span>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GlAccountToDebit)
+                    @Html.DropDownListFor(model => model.GlAccountToDebit, new SelectList(Model.GlAccounts,
+    "id", "name"), "Choose an Option", new { @class = "form-control", required = "required", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.GlAccountToDebit, "", new { @class = "text-danger" })
+                    <span id="debiterror" class="text-red"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GlAccountToCredit)
+                    @Html.DropDownListFor(model => model.GlAccountToCredit, new SelectList(Model.GlAccounts,
+    "id", "name"), "Choose an Option", new { @class = "form-control", required = "required", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.GlAccountToCredit, "", new { @class = "text-danger" })
+                    <span id="crediterror" class="text-red"></span>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Amount)
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", type = "number", required = "required", step = "any", minlength = 3, min = 0.00, maxlength = 15 } })
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    <span id="Amounterror" class="text-red"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Narration)
+                    @Html.TextAreaFor(model => model.Narration, new { @class = "form-control", minlength = 5, maxlength = 255, required = "required" })
+                    @Html.ValidationMessageFor(model => model.Narration, "", new { @class = "text-danger" })
+                    <span id="Narrationerror" class="text-red"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="SUBMIT" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
+
+
+            @section ViewSpecificJavascript
+    {
+                <script>
+                    $(document).ready(function () {
+                        setTimeout(function () {
+                            $(".alert").fadeOut(100, null);
+                        },
+                            3000);
+                        //$('#GlAccountToDebit').select2();
+                        //$('#GlAccountToCredit').select2();
+
+                        //$("input[type = 'submit']").attr("disabled", true);
+                        $('#Narration').keyup(function () {
+                            value = $(this).val();
+                            if (value.length < 3 || value.length > 150) {
+                                $("input[type = 'submit']").attr("disabled", true);
+                                e.preventDefault();
+                                $("#narerror").html("Narration can only be between 3 or 150 characters");
+                            } else {
+                                $("input[type = 'submit']").attr("disabled", false);
+                                $("#narerror").html("");
+
+                            }
+                        })
+
+
+                        $("form").submit(function (e) {
+
+                            var debit = $('#GlAccountToDebit').val();
+                            var credit = $('#GlAccountToCredit').val();
+                            var amount = $('#Amount').val();
+                            var nar = $('#Narration').val();
+                            if (nar == "" || amount == 0 || debit == 0 || credit == 0) {
+                                $("input[type = 'submit']").attr("disabled", true);
+                                e.preventDefault();
+                                $("#error").html("All fields are required");
+                            }
+
+                            else {
+                                $("input[type = 'submit']").attr("disabled", false);
+                                $("#error").html("");
+                            }
+
+
+                        })
+                    })
+                </script>
+            }
+        }
+        else
+        {
+            <p> Sorry business is closed, you can't perform any transactions until business is opened </p>
+
+        }
+    }
+}

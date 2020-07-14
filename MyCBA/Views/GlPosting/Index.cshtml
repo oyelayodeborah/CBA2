@@ -1,0 +1,116 @@
+﻿@model IEnumerable<MyCBA.Core.Models.GlPosting>
+
+@{
+   ViewBag.Title = "View All GL Postings";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Message"]!=null)
+{
+    if (TempData["Message"].ToString() == "Success")
+    {
+    <div class="alert alert-success">
+        <p>@TempData["Message"] <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+
+    </div>
+
+    }
+}
+<p>
+    @Html.ActionLink("Post Transactions into GLs", "Create")
+</p>
+<table class="table table-hover table-responsive table-condensed" id="glpost">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.name)*@
+                Debit GL Account Name
+            </th>
+            @*<th>
+        @Html.DisplayNameFor(model => model.address)
+            Debit GL Account Code
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.name)*@
+                Credit GL Account Name
+            </th>
+            @*<th>
+        @Html.DisplayNameFor(model => model.address)
+            Credit GL Account Code
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.gender)*@
+                Amount
+            </th>
+            @*<th>
+        @Html.DisplayNameFor(model => model.phoneNumber)Narration
+
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.email)*@Transaction Date
+
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.gender)>*@ Status
+
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            MyCBA.Data.Repositories.GlAccountRepository glAcctRepo = new MyCBA.Data.Repositories.GlAccountRepository();
+            var getDebitAcct = glAcctRepo.GetByCode(item.GlAccountToDebitCode);
+            var getCreditAcct = glAcctRepo.GetByCode(item.GlAccountToCreditCode);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => getDebitAcct.Name)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.GlAccountToDebitCode)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => getCreditAcct.Name)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.GlAccountToCreditCode)
+        </td>*@
+            <td>
+                @item.Amount.ToString("N02")
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Narration)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id })
+            </td>
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+@section ViewSpecificJavascript
+    {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").fadeOut(100, null);
+            },
+                3000);
+        });
+        $("#glpost").dataTable();
+
+    </script>
+
+}

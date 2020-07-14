@@ -1,0 +1,212 @@
+﻿@model IEnumerable<MyCBA.Core.Models.AccountConfiguration>
+
+@{
+    ViewBag.Title = "View Account Configuration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Data.Repositories.GlAccountRepository glAcctRepo = new MyCBA.Data.Repositories.GlAccountRepository();
+
+
+}
+
+
+
+<table class="table table-hover table-responsive table-condensed table-bordered table-striped active" id="customers">
+    <thead>
+        <tr>
+
+            <th>
+                Name
+            </th>
+            <th>
+                Details
+            </th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var getSavExpGLId = glAcctRepo.Get(item.SavingsInterestExpenseGLId);
+            var getSavPayGLId = glAcctRepo.Get(item.SavingsInterestPayableGLId);
+            var getCurExpGLId = glAcctRepo.Get(item.CurrentInterestExpenseGLId);
+            var getCurPayGLId = glAcctRepo.Get(item.CurrentInterestPayableGLId);
+            var getCurIncomeGLId = glAcctRepo.Get(item.CurrentCotIncomeGLId);
+            //var getLoanExpGLId = glAcctRepo.Get(item.LoanInterestExpenseGLId);
+            var getLoanIncomeGLId = glAcctRepo.Get(item.LoanInterestIncomeGLId);
+
+            <tr>
+                <td> @Html.DisplayNameFor(model => model.IsBusinessOpen)</td>
+                <td>
+                    @item.IsBusinessOpen
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.FinancialDate)
+
+                </td>
+                <td>
+                    @item.FinancialDate.ToString("D")
+
+                </td>
+            </tr>
+           //----------Current-----
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CurrentCreditInterestRate)
+                    <label>(in %)</label>
+                </td>
+                <td>
+                    @item.CurrentCreditInterestRate.ToString("N00")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Interest Expense GL
+                </td>
+                <td>
+                    @if (getCurExpGLId != null)
+                    {
+                        @getCurExpGLId.Name
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CurrentMinimumBalance)
+                    <label>(in Naira)</label>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentMinimumBalance)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Interest Payable GL
+
+                </td>
+                <td>
+                    @if (getCurPayGLId != null)
+                    {
+                        @getCurPayGLId.Name}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CurrentCot)
+                    <label>(in Naira)</label>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentCot)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Cot Income GL
+                </td>
+                <td>
+                    @if (getCurIncomeGLId != null)
+                    {
+                        @getCurIncomeGLId.Name
+                    }
+                </td>
+            </tr>
+
+            //--------Loan---------
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.LoanDebitInterestRate)
+                    <label>(in %)</label>
+                </td>
+                <td>
+                    @item.LoanDebitInterestRate.ToString("N00")
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    Loan Interest Income GL
+                </td>
+                <td>
+                    @if (getLoanIncomeGLId != null)
+                    {
+                        @getLoanIncomeGLId.Name
+                    }
+                </td>
+            </tr>
+            //------Savings---------
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.SavingsCreditInterestRate)
+                    <label>(in %)</label>
+                </td>
+                <td>
+                    @item.SavingsCreditInterestRate.ToString("N00")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Savings Interest Expense GL
+                </td>
+                <td>
+                    @if (getSavExpGLId != null)
+                    {
+                        @getSavExpGLId.Name
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Savings Interest Payable GL
+
+                </td>
+                <td>
+                    @if (getSavPayGLId != null)
+                    {
+                        @getSavPayGLId.Name
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.SavingsMinimumBalance)
+                    <label>(in Naira)</label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SavingsMinimumBalance)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Configuration Status
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+<div>
+    <p>
+        @Html.ActionLink("Edit Savings Configuration", "Savings")|
+        @Html.ActionLink("Edit Current Configuration", "Current")|
+        @Html.ActionLink("Edit Loan Configuration", "Loan")
+
+    </p>
+</div>
+
+@section ViewSpecificJavascript
+    {
+    <script>
+
+        $("#customers").dataTable();
+
+    </script>
+
+}

@@ -1,0 +1,138 @@
+﻿<header class="main-header" style="background-color:#333">
+    @* BEGIN Logo *@
+    <a href="@Url.Action("Index", "Home")" class="logo" style="background-color:#333">
+        @* Mini logo for sidebar 50x50 pixels *@
+        <span class="logo-mini fa fa-yelp"style="padding-top:10px;"></span>
+        @* Logo for regular state and mobile devices *@
+        <span class="logo-lg fa fa-yelp" style="padding-top:10px;"><b>Debs</b>CBA</span>
+    </a>
+    @* END Logo *@
+    @* BEGIN Header *@
+    <nav class="navbar navbar-static-top" style="color:#333" role="navigation">
+        
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" style="background-color:#333" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu"style="color:#333; background-color:lightgray">
+            <ul class="nav navbar-nav">
+
+                @* BEGIN Messages *@
+
+                <li>
+                    @{
+                        if (Session["id"] != null)
+                        {
+                            if (Session["role"].ToString() == "Admin")
+                            {
+                                MyCBA.Data.Repositories.AccountConfigurationRepository _context = new MyCBA.Data.Repositories.AccountConfigurationRepository();
+                                var businessConfigTable = _context.GetAll();
+                                var businessConfig = businessConfigTable.Where(c => c.FinancialDate != null).FirstOrDefault();
+                                if (businessConfigTable.Count() == 0)
+                                {
+
+                                    <a class="fa fa-gear"  style="color:#333"href="@Url.Action("Setup", "EOD")"> Open Business</a>
+                                }
+                                else if (businessConfig.IsBusinessOpen == true)
+                                {
+                                    <a class="fa fa-gear"style="color:#333" href="@Url.Action("Close", "EOD")"> Close Business</a>
+                                <li>
+                                    <a style="color:#333">@businessConfig.FinancialDate.ToString("D")</a>
+                                </li>
+
+                                }
+                                else if (businessConfig.IsBusinessOpen == false)
+                                {
+
+                                <a class="fa fa-gear"style="color:#333" href="@Url.Action("Open", "EOD")"> Open Business</a>
+
+
+
+                                @*<li>
+                            <a class="fa fa-gear" href="@Url.Action("RunEOD", "EOD")"> Run EOD</a>
+
+                        </li>*@
+                                <li>
+                                    <a style="color:#333">@businessConfig.FinancialDate.ToString("D")</a>
+                                </li>
+                                }
+                            }
+                        }
+
+                    }
+
+                    </li>
+                    
+                    @* BEGIN User Account Menu *@
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#333">
+                            <img src="~/Content/img/user1.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">
+                                @if (Session["id"] != null)
+                                {
+                                    <label style="color:#333"> @Session["role"] @Session["username"]</label>
+                                }
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="~/Content/img/user1.png" class="img-circle" alt="User Image">
+
+                                <p style="color:#333">
+                                    @if (Session["id"] != null)
+                                    {
+                                        <label style="color:#333">Hello @Session["role"] @Session["username"]</label>
+                                        if (Session["role"].ToString() == "Teller")
+                                        {
+                                            MyCBA.Data.Repositories.TellerRepository tellerRepo = new MyCBA.Data.Repositories.TellerRepository();
+                                            MyCBA.Data.Repositories.GlAccountRepository glAcctRepo = new MyCBA.Data.Repositories.GlAccountRepository();
+                                            var userid = (int)Session["id"];
+                                            var getTillAccount = tellerRepo.GetByUser(userid);
+                                            if (getTillAccount != null)
+                                            {
+                                                var getGL = glAcctRepo.Get(getTillAccount.TillAccountId);
+                                                <label style="color:#333">TillAccount Balance: #</label> @getGL.acountBalance.ToString("N02");
+
+                                            }
+                                            else
+                                            {
+                                                <label>You dont have a till Account yet</label>
+                                            }
+
+                                        }
+                                    }
+                                </p>
+                            </li>
+                            @*<li class="user-body">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Followers</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Sales</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Friends</a>
+                            </div>
+                        </div>
+                    </li>*@
+                            <li class="user-footer">
+                                @*<div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        </div>*@
+                                <div class="pull-right">
+                                    <a href="/Home/Logout" class="btn btn-default btn-flat">Sign out</a>
+                                    @*@Html.ActionLink("Logout","Logout", new { }, new { @class = "btn btn-default btn-flat" })*@
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    @* END User Account Menu *@
+                    @* BEGIN Control Sidebar Toggle Button *@
+                    @*<li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>*@
+                    @* END Control Sidebar Toggle Button *@
+                </ul>
+        </div>
+    </nav>
+</header>

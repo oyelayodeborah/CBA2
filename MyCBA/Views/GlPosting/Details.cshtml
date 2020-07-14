@@ -1,0 +1,68 @@
+﻿@model MyCBA.Core.Models.GlPosting
+
+@{
+    ViewBag.Title = "View GL Posting Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MyCBA.Data.Repositories.GlAccountRepository glAcctRepo = new MyCBA.Data.Repositories.GlAccountRepository();
+    var getDebitAcct = glAcctRepo.GetByCode(Model.GlAccountToDebitCode);
+    var getCreditAcct = glAcctRepo.GetByCode(Model.GlAccountToCreditCode);
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => getDebitAcct.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GlAccountToDebitCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => getCreditAcct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GlAccountToCreditCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Model.Amount.ToString("N02")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Narration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Narration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TransactionDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.report)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.report)
+        </dd>
+
+    </dl>
+
+
+
+    <p>
+        @Html.ActionLink("View All GL Postings", "Index")
+    </p>
+</div>
